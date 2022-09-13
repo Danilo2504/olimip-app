@@ -1,0 +1,42 @@
+const SignIn=()=>{
+
+    return <div class="content-container"><div class='sign-container'>
+	<div>
+		<h2 class='section-title'>Ingresa Tus Datos</h2>
+		<form action='/users/signin' method='POST'>
+			<div class='form-group-container'>
+				<input
+					autofocus='true'
+					class='form-input form-input-username'
+					type='text'
+					name='username'
+					placeholder='Username'
+					required='true'
+				/>
+			</div>
+			<div class='form-group-container'>
+				<input
+					class='form-input'
+					type='password'
+					name='password'
+					placeholder='Contraseña'
+					required='true'
+				/>
+			</div>
+			<div class='form-group-container'>
+				<input
+					class='form-input form-input-submit'
+					type='submit'
+					value='Ingresar'
+				/>
+			</div>
+		</form>
+		<small>¿No tienes una cuenta?
+			<a class='mute' href='/users/signup'>Registrate</a>
+		</small>
+	</div>
+	<div class='sign-hero sign-in-img' alt='lasuizabiblioteca sign'></div>
+</div>
+</div>
+}
+export default SignIn;
