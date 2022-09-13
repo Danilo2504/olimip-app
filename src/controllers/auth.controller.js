@@ -1,5 +1,4 @@
 const User = require('../models/user.model')
-const Verification = require('../models/verification.model')
 const {genToken, getToken} = require('../helpers/jwt')
 const sendEmail = require('../helpers/sendEmail')
 const randtoken = require('rand-token')
@@ -30,22 +29,17 @@ const register = async (req = request, res = response) => {
 
     const user = new User({name, email, password})
 
-    // const token = randtoken.generate(8)
-
     const userFind = await user.findBy({email})
 
     if(!userFind) await user.save()
-
-    // const verification = new Verification({token, userId: userSaved.id})
-    // await verification.save()
 
     const jwtToken = await genToken({name, email, password}, '3h')
 
     await sendEmail({
         email,
         service: 'gmail',
-        from: 'MC Datapacks',
-        subject: 'Confirm account - MC Datapacks',
+        from: 'Puntos Culturales',
+        subject: 'Confirmar cuenta - Puntos Culturales',
         html: html(process.env.URL, jwtToken)
     })
 
@@ -53,11 +47,7 @@ const register = async (req = request, res = response) => {
 }
 
 const confirm = async (req = request, res = response) => {
-    const {name, email, password} = await getToken(req.query.token)
-
-    // const verification = new Verification({token: token.token})
-    // const verificationFind = await verification.find()
-    // console.log(verificationFind);
+    const {name, email, password} = await getToken(req.query.token);
 
     console.log(await getToken(req.query.token));
 
@@ -66,8 +56,6 @@ const confirm = async (req = request, res = response) => {
     if(!email) return res.status(400).json({error: 'Invalidad token'})
 
     await user.update({name, password, verified: true})
-
-    // await verification.delete()
 
     res.send("<script>window.close();</script>")
 }
