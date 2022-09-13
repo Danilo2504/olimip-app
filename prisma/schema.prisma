@@ -25,10 +25,10 @@ model Location {
   createdAt DateTime @default(now())
   enabled   Boolean  @default(true)
   name      String   @unique
-  desc      String   @db.VarChar(255)
+  desc      String?  @db.VarChar(255)
   ubication String?
-  valoration Int     @default(0)
-  web       String
+  valoration Int?    @default(0)
+  web       String?
 }
 
 enum Role {
