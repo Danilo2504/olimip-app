@@ -28,6 +28,7 @@ model Location {
   desc      String   @db.VarChar(255)
   ubication String?
   valoration Int     @default(0)
+  web       String
 }
 
 enum Role {

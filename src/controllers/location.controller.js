@@ -2,9 +2,9 @@ const Location = require('../models/location.model')
 
 const post = async (req = request, res = response) => {
     // res.status(200).json({data: "File send"})
-    const {name, desc, ubication} = req.body
+    const params = req.body
 
-    const location = new Location({name, desc, ubication})
+    const location = new Location(params)
 
     const newLocation = await location.save()
 
