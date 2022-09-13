@@ -29,9 +29,10 @@ const register = async (req = request, res = response) => {
 
     const user = new User({name, email, password})
 
-    const userFind = await user.findBy({email})
+    const userEmailFind = await user.findBy({email})
+    const userNameFind = await user.findBy({name})
 
-    if(!userFind) await user.save()
+    if(!userEmailFind && !userNameFind) await user.save()
 
     const jwtToken = await genToken({name, email, password}, '3h')
 
