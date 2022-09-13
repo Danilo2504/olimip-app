@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Searchbar } from 'react-native-paper';
+import Home from "./components/Home";
+import Login from './components/Login';
+import {tasks} from "./services/seed";
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <ScrollView>
+        <View style={styles.HomeContainer}>
+          <Searchbar
+            placeholder="Buscar"
+          />
+          <Login/>
+          {tasks.map((task)=><Home key={task.id} data={task}/>)}
+        </View>
+      </ScrollView>
+    </NavigationContainer>
+    
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  HomeContainer: {
+    alignContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
   },
+
 });
