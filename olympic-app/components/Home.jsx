@@ -1,60 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import LittleMuseum from './LittleMuseum';
 
-export default function Home({data}){
-const {name} = data;
+export default function Home({}){
     return(
-        <View style={styles.cardContainer}>
-            <View style={styles.imageContainer}>
-                <Image source={require("../assets/image.png")} style={styles.imageStyle}/>
-            </View>
-            <View style={styles.tittleContainer}>
-                <Text style={styles.titleStyle}>{name}</Text>
-            </View>
+        <View style={styles.contentContainer}>
+            <LittleMuseum/>
+            <LittleMuseum/>
+            <LittleMuseum/>
         </View>
     );
 }
 
-const deviceWidth = Math.round(Dimensions.get('window').width)
 const styles = StyleSheet.create({
-    cardContainer: {
-      flex: 1,
-      flexWrap: 'wrap',
-      width: deviceWidth - 25,
-      backgroundColor: "#0f0f0",
-      height: 100,
-      borderRadius: 5,
-      shadowColor: "black",
-      shadowOffset: {width: 5, height: 5},
-      shadowOpacity: 0.75,
-      shadowRadius: 5,
-      elevation: 2,
-      marginVertical: 20,
-    },
-
-    imageContainer:{
-        flex: 1,
-        backgroundColor: "red",
-        height: 40,
-        width:  60,
-    },
-
-    imageStyle: {
-        height: 40,
-        width: 50,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-    },
-
-    tittleContainer:{
-        flex: 1,
-        backgroundColor: "blue",
-        width: 100,
-    },
-
-    titleStyle:{
-        fontSize: 20,
-        fontWeight: "800",
-
+    contentContainer: {
+        width: "var(--page-width)",
+        marginVertical: "auto",
+        paddingVertical: "50px",
+        flexGrow: 1,
     },
 });

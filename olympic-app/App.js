@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import Home from "./components/Home";
-import Login from './components/Login';
-import {tasks} from "./services/seed";
+// import Login from './components/Login';
+import './index.css'
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
@@ -15,8 +15,8 @@ export default function App() {
           <Searchbar
             placeholder="Buscar"
           />
-          <Login/>
-          {tasks.map((task)=><Home key={task.id} data={task}/>)}
+          {/* <Login/> */}
+          <Home/>
         </View>
       </ScrollView>
     </NavigationContainer>
