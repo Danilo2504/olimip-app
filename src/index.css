@@ -1,7 +1,7 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing:border-box;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 :root {
 	--main-color: #fff;
@@ -9,11 +9,11 @@
 	--font-color: #66594c;
 	--black: #383738;
 	--white: #fff;
-	--light-green:rgb(0, 72, 255);
+	--light-green: rgb(0, 72, 255);
 	--green: blue;
 	--white-hover: rgba(255, 255, 255, 0.85);
 	--third-color: #979797;
-	--page-width: 60%;
+	--page-width: 70%;
 }
 
 body {
@@ -37,8 +37,8 @@ body {
 	/* border: 3px solid var(--light-green); */
 	/* justify-content: space-between; */
 }
-#root{
-height:100vh;
+#root {
+	height: 100vh;
 }
 /* ------------------------------------------------------ */
 li {
@@ -263,7 +263,6 @@ a.mute {
 	/* background: url('https://www.acescritores.com/wp-content/uploads/PN27C3F1_1.jpg'); */
 	background: url('https://previews.123rf.com/images/stuartphoto/stuartphoto1402/stuartphoto140200673/26064366-computer-login-car%C3%A1cter-mostrando-p%C3%A1gina-web-ingresa-seguridad.jpg');
 	/* background: url('/images/7.jpg'); */
-	
 }
 .sign-hero {
 	width: 60%;
@@ -315,41 +314,107 @@ a.mute {
 	background-color: var(--green);
 }
 /* home */
-.littleMuseumCtn{
-	border-radius:5px;
-	background:rgba(238, 238, 238, 0.806);
+.littleMuseumCtn {
+	border-radius: 5px;
+	background: rgba(238, 238, 238, 0.806);
 	padding: 10px 20px;
-	border:1px solid #eee;
+	border: 1px solid #eee;
 	display: flex;
-	
+
 	height: 150px;
-	margin-bottom:20px;
+	margin-bottom: 20px;
 }
-.thumbnail{
+.thumbnail {
 	display: inline-block;
 	width: 150px;
 	height: 100%;
 	background-color: coral;
 	border-radius: 5px;
 }
-.titleViewMoreCtn{
+.titleViewMoreCtn {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-left:10px;
+	margin-left: 10px;
 	width: 100%;
 }
-.titleArrow{
+.titleArrow {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
 	align-items: center;
 }
-.titleArrow p{
+.titleArrow p {
 	font-weight: bold;
 }
-.viewMoreCtn{
+.viewMoreCtn {
 	font-size: 20px;
 	/* text-align: center; */
 	/* position: relative; */
+}
+
+/* ----------------------SHELFFFFFFFFF-estanterias--------------------------------  */
+.section-title {
+	color: var(--green);
+	margin: 0;
+	margin-bottom: 20px;
+}
+.shelf-form select,
+.shelf-form button {
+	background: none;
+	border: 1px solid;
+	cursor: pointer;
+}
+
+/* ----------------------books TODOS LOS LIBROS-------------------------------- */
+.allbooks-container {
+	max-height: 3200px;
+	overflow-y: auto;
+}
+/* tabla */
+*
+	------------------------------------------------------
+	*/
+	.search-results-section {
+	margin-bottom: 50px;
+}
+.search-results-title {
+	margin-bottom: 20px;
+}
+.query-text {
+	font-weight: bold;
+	margin: 0;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+
+.search-results-title span {
+	color: var(--third-color);
+}
+.search-results-container {
+	max-height: 400px;
+	overflow: auto;
+}
+.search-results-table {
+	border: 1px;
+}
+.search-results-thead {
+	background-color: #737373;
+	color: var(--white);
+	position: sticky;
+	top: 0;
+	text-align: left;
+}
+.search-results-tbody:nth-child(odd) {
+	background-color: var(--white);
+}
+.search-results-tbody:nth-child(even) {
+	background-color: #f7f7f7f7;
+}
+.search-results-tbody td {
+	padding: 5px 4px;
+	text-transform: capitalize;
+}
+.search-results-likes-td {
+	display: flex;
 }
