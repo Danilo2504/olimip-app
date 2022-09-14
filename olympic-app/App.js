@@ -11,7 +11,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <ScrollView>
-        <View style={styles.HomeContainer}>
+        <View>
           <Searchbar
             placeholder="Buscar"
           />
@@ -23,11 +23,3 @@ export default function App() {
     
   );
 }
-
-const styles = StyleSheet.create({
-  HomeContainer: {
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-
-});

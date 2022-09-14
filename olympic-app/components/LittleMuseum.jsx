@@ -8,11 +8,9 @@ export default function LittleMuseum(){
             </View>
             <View style={styles.titleViewMoreCtn}>
                 <View style={styles.titleAndDescriptionCtn}>
-                    <View style={styles.titleArrow}>
-                        <Text>Museo Bellas Artes, Buenos Aires</Text>
-                    </View>
-                    <View style={styles.description}>
-                        <Text>
+                    <Text style={styles.titulo}>Museo Bellas Artes, Buenos Aires</Text>
+                    <View style={styles.descContainer}>
+                        <Text style={styles.desc}>
                             Lorem iTextsum dolor sit amet consectetur adiTextisicing elit. Reiciendis deserunt, quod doloribus beatae.
                         </Text>
                     </View>
@@ -24,7 +22,7 @@ export default function LittleMuseum(){
 
 const styles = StyleSheet.create({
     littleMuseumCtn:{
-        borderRadius: 5,
+        borderRadius: 2,
         backgroundColor:"rgba(238, 238, 238, 0.806)",
         paddingVertical: 10,
         paddingHorizontal: 20,
@@ -33,16 +31,17 @@ const styles = StyleSheet.create({
         display: "flex",
         flexWrap: "nowrap",
         flexDirection: "row",
-        height: 100,
-        width: 300,
+        width: "90%",
+        maxHeight: 125,
         marginBottom: 20,
+        // overflow: "hidden"
     },
 
     thumbnail:{
-        width: 70,
-        height: "100%",
+        height: 100,
         backgroundColor: "coral",
-        borderRadius: 5,
+        borderRadius: 2,
+        aspectRatio: "1/1"
     },
 
     titleViewMoreCtn:{
@@ -50,14 +49,21 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginLeft: 10,
-        width: "100%",
     },
 
-    titleArrow:{
-        display: "flex",
-        justifyContent: "space-between",
-        marginBottom: 10,
-        alignItems: "center",
+    titulo:{
+        fontWeight: '600',
     },
+
+    descContainer:{
+        width: "100%",
+        backgroundColor: "red"
+    },
+
+    desc:{
+        width: "100%",
+        textOverflow: "ellipsis",
+        wordWrap: "break-word"
+    },  
 
 });

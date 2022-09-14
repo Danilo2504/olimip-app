@@ -16,7 +16,10 @@ const styles = StyleSheet.create({
     contentContainer: {
         width: "var(--page-width)",
         marginVertical: "auto",
-        paddingVertical: "50px",
+        paddingVertical: 50,
+        paddingHorizontal: 0,
         flexGrow: 1,
+        display: "flex",
+        alignItems: "center"
     },
 });
