@@ -7,19 +7,13 @@ export default function LittleMuseum(){
                 <Image src={require('../assets/image.png')}/>
             </View>
             <View style={styles.titleViewMoreCtn}>
-                <View> 
-                    {
-                        //style=styles.titleAndDescriTexttionCtn
-                    }
+                <View style={styles.titleAndDescriptionCtn}>
                     <View style={styles.titleArrow}>
                         <Text>Museo Bellas Artes, Buenos Aires</Text>
                     </View>
-                    <View> 
-                        {
-                            //style=styles.descriTexttion
-                        }
+                    <View style={styles.description}>
                         <Text>
-                            Lorem iTextsum dolor sit amet consectetur adiTextisicing elit. Reiciendis deserunt, quod doloribus beatae cum culTexta imTextedit dolore est quo Textariatur molestiae aTexteriam incidunt, doloremque consequatur sed necessitatibus id commodi. Accusamus.
+                            Lorem iTextsum dolor sit amet consectetur adiTextisicing elit. Reiciendis deserunt, quod doloribus beatae.
                         </Text>
                     </View>
                 </View>
@@ -30,36 +24,40 @@ export default function LittleMuseum(){
 
 const styles = StyleSheet.create({
     littleMuseumCtn:{
-        borderRadius: "5px",
+        borderRadius: 5,
         backgroundColor:"rgba(238, 238, 238, 0.806)",
-        paddingVertical: "10px",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderColor: "#eee",
-        borderWidth: "1px",
+        borderWidth: 1,
         display: "flex",
-        height: "150px",
-        marginBottom :"20px",
+        flexWrap: "nowrap",
+        flexDirection: "row",
+        height: 100,
+        width: 300,
+        marginBottom: 20,
     },
 
     thumbnail:{
-        display: "inline-block",
-        width: "150px",
+        width: 70,
         height: "100%",
-        // backgroundColor: "coral",
-        borderRadius: "5px",
+        backgroundColor: "coral",
+        borderRadius: 5,
     },
 
     titleViewMoreCtn:{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        marginLeft: "10px",
+        marginLeft: 10,
         width: "100%",
     },
 
     titleArrow:{
         display: "flex",
         justifyContent: "space-between",
-        marginBottom: "10px",
+        marginBottom: 10,
         alignItems: "center",
     },
+
 });
