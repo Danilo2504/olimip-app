@@ -17,6 +17,10 @@ const UpdateUserSchema = z.object({
     password: z.string().min(1).max(255).optional()
 })
 
+const FindUserSchema = z.object({
+    id: z.string().min(1).max(255)
+})
+
 const parseSchema = (schema) => {
     return (req = request, res = response, next) => {
         const result = schema.safeParse(req.body)
@@ -32,5 +36,6 @@ module.exports = {
     LoginSchema,
     RegisterSchema,
     UpdateUserSchema,
+    FindUserSchema,
     parseSchema
 }

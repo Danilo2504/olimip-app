@@ -5,8 +5,10 @@ module.exports = async (req = request, res = response, next) => {
 
     const user = new User({name})
 
-    const find = await user.find()
+    const userFinded = await user.find()
 
-    if(!find) return res.status(404).json({error: "Name not found."})
+    console.log("Userfiasbd");
+
+    if(!userFinded) return res.status(404).json({error: "Name not found."})
     next()
 }

@@ -6,9 +6,14 @@ const bcrypt = require('bcryptjs')
 module.exports = class User{
 
     constructor(params){
-        this.name = params.name
-        this.email = params.email
-        this.password = params.password
+        try {
+            this.name = params.name
+            this.email = params.email
+            this.password = params.password
+        } catch (error) {
+            
+        }
+
     }
 
     optional(){

@@ -61,8 +61,20 @@ const confirm = async (req = request, res = response) => {
     res.send("<script>window.close();</script>")
 }
 
+const find = async (req = request, res = response) => {
+    const id = await getToken(req.header('Authorization')).id
+
+    const user = await new User().findBy({id: id})
+
+    return res.status(200).json({
+        name: user.name,
+        role: user.role
+    })
+}
+
 module.exports = {
     login,
     register,
-    confirm
+    confirm,
+    find
 }
