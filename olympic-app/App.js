@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import Home from "./components/Home";
-// import Login from './components/Login';
-import './index.css'
+import "./index.css";
+import Login from './components/Login';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
           <Searchbar
             placeholder="Buscar"
           />
-          {/* <Login/> */}
+          <Login/>
           <Home/>
         </View>
       </ScrollView>

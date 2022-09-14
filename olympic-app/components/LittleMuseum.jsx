@@ -4,16 +4,14 @@ export default function LittleMuseum(){
     return (
         <View style={styles.littleMuseumCtn}>
             <View style={styles.thumbnail}>
-                <Image src={require('../assets/image.png')}/>
+                <Image style={styles.image} source={require('../assets/image.png')}/>
             </View>
-            <View style={styles.titleViewMoreCtn}>
-                <View style={styles.titleAndDescriptionCtn}>
+            <View style={styles.titleAndDescContainer}>
+                <View style={styles.titleContainer}>
                     <Text style={styles.titulo}>Museo Bellas Artes, Buenos Aires</Text>
-                    <View style={styles.descContainer}>
-                        <Text style={styles.desc}>
-                            Lorem iTextsum dolor sit amet consectetur adiTextisicing elit. Reiciendis deserunt, quod doloribus beatae.
-                        </Text>
-                    </View>
+                </View>
+                <View style={styles.descContainer}>
+                    <Text style={styles.desc}>Lorem iTextsum dolor sit amet consectetur adiTextisicing elit. Reiciendis deserunt, quod doloribus beatae.</Text>
                 </View>
             </View>
         </View>
@@ -34,30 +32,36 @@ const styles = StyleSheet.create({
         width: "90%",
         maxHeight: 125,
         marginBottom: 20,
-        // overflow: "hidden"
     },
-
     thumbnail:{
         height: 100,
-        backgroundColor: "coral",
         borderRadius: 2,
         aspectRatio: "1/1"
     },
 
-    titleViewMoreCtn:{
+    image: {
+        height: "100%",
+        width: "100%",
+    },
+
+    titleAndDescContainer:{
         display: "flex",
-        justifyContent: "space-between",
+        flex: 1,
+        justifyContent: "space-around",
         alignItems: "center",
         marginLeft: 10,
     },
 
+    titleContainer:{
+        width: "100%",
+    },
+
     titulo:{
-        fontWeight: '600',
+        fontWeight: '800',
     },
 
     descContainer:{
         width: "100%",
-        backgroundColor: "red"
     },
 
     desc:{

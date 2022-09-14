@@ -14,12 +14,14 @@ export default function Home({}){
 
 const styles = StyleSheet.create({
     contentContainer: {
-        width: "var(--page-width)",
-        marginVertical: "auto",
+        width: "100%",
         paddingVertical: 50,
         paddingHorizontal: 0,
         flexGrow: 1,
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
+        // '@media screen and (max-width:350px)'{
+        //         backgroundColor:"red";
+        // }
     },
 });

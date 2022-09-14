@@ -16,6 +16,12 @@
 	--page-width: 100%;
 }
 
+@media screen and (max-width:350px){
+	body{
+		background-color:red !important;
+	}
+}
+
 body {
 	background-color: var(--main-color);
 	color: var(--rojo);

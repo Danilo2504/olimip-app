@@ -21,7 +21,7 @@ export default function Login(){
                 placeholder="Ingrese Contraseña"
             />
             <TouchableOpacity style={styles.button}>
-                Aceptar
+                <Text>Aceptar</Text>
             </TouchableOpacity>
         </View>
     );
