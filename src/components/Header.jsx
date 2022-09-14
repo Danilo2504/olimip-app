@@ -1,46 +1,77 @@
+import { useRef } from "react";
 const Header=()=>{
-    return <>
-   <header class='header'>
-	<nav class='header-nav'>
-		<h1 class='header-logo'>
+	const token = localStorage.getItem('token-lugar-cultural');
+	
+	let isToken = null
+
+	const showDropdown = e => {
+		document.querySelector('.user-dropdown-menu').classList.toggle('none')
+	}
+const cerrarSesion=()=>localStorage.removeItem('token-lugar-cultural');
+
+	if(token){ 
+		console.log("hay token");
+		isToken =(
+			<div className='header-pfp-container'>
+				<div
+					style={{backgroundColor:'red'}}
+					className='header-pfp'
+				></div>
+				<span onClick={showDropdown} className='header-pfp-down'>👇</span>
+				<div className='user-dropdown-menu none' >
+					<h5 className='user-dropdown-title'>'sdfsdf</h5>
+					<a href='/p/{{user.username}}' className='user-dropdown-a'>Perfil</a>
+					<a href='/settings' className='user-dropdown-a'>Configuracion</a>
+					<a href='/about' className='user-dropdown-a'>Ayuda</a>
+					<a className='user-dropdown-a' href='/users/signin' onClick={cerrarSesion}>Cerrar Sesion</a>
+				</div>
+			</div> 	
+		)
+	}else{
+		isToken =(
+			<>
+				<li className='header-link header-link-signin'>
+					<a href='/users/signin'>Ingresar</a>
+				</li>
+				<li className='header-link header-link-signup'>
+					<a href='/users/signup'>Registrar</a>
+				</li>
+			</>
+		)
+	}
+    return (
+		<>
+		
+   <header className='header'>
+	<nav className='header-nav'>
+		<h1 className='header-logo'>
 			<a href='/'>Puntos Culturales</a>
 		</h1>
-		<div class='header-left'>
-			<li class='header-link'>
+		<div className='header-left'>
+			<li className='header-link'>
 				<a href='/todo'>Lugares</a>
 			</li>
-			<li class='header-link'>
+			<li className='header-link'>
 				<a href='/estanterias?shelf=8'>info básica sobre el museo</a>
 			</li>
 		</div>
-		<div class='header-right'>
-			{/* {{#if user}}
-				<div class='header-pfp-container'>
-					<div
-						style='background-color: {{user.color}};'
-						class='header-pfp'
-					></div>
-					<span class='header-pfp-down'>👇</span>
-					<div class='user-dropdown-menu none'>
-						<h5 class='user-dropdown-title'>{{user.username}}</h5>
-						<a href='/p/{{user.username}}' class='user-dropdown-a'>Perfil</a>
-						<a href='/settings' class='user-dropdown-a'>Configuracion</a>
-						<a href='/about' class='user-dropdown-a'>Ayuda</a>
-						<a class='user-dropdown-a' href='/users/logout'>Cerrar Sesion</a>
-					</div>
-				</div>
-			{{else}} */}
-				<li class='header-link header-link-signin'>
-					<a href='/users/signin'>Ingresar</a>
-				</li>
-				<li class='header-link header-link-signup'>
-					<a href='/users/signup'>Registrar</a>
-				</li>
-			{/* {{/if}} */}
+		
+		<div className='header-right'>
+			
+
+			{isToken}
+
+
+			 
+				
+			
+				
+			
+			
 		</div>
 
 	</nav>
 </header>
-</>
+</>)
 }
 export default Header;

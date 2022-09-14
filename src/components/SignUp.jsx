@@ -6,10 +6,10 @@ const SignUp =()=>{
         password:'',
         // repeatPassword:'',
 	});
-    const registrar=(e)=>{
+    const registrar=async (e)=>{
      e.preventDefault();
     //  console.log(form);
-     fetch('http://10.120.0.48:3006/api/auth/register',{
+     await fetch('http://localhost:3006/api/auth/register',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const SignUp =()=>{
     <input  type="submit" class="form-input form-input-submit" value="Registrar"/>
 </div>
 </form>
-<small>¿Ya tienes una cuenta?<a class="mute" href="/users/signup">
+<small>¿Ya tienes una cuenta?<a class="mute" href="/users/signin">
     Ingresa</a></small>
 </div>
 <div class="sign-hero sign-up-img"></div>
