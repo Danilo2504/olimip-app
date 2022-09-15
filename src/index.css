@@ -418,3 +418,19 @@ a.mute {
 .search-results-likes-td {
 	display: flex;
 }
+/* visitasItemCtn */
+.visitasItemCtn {
+	position: relative;
+}
+.visitMark {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 5px 10px;
+	background-color: var(--green);
+	color: white;
+	font-weight: bold;
+}
+.visitaHora {
+	margin-top: 5px;
+}

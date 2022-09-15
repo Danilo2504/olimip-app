@@ -1,20 +1,37 @@
+import { useContext, useEffect } from 'react';
+import VisitasContext from '../context/VisitasContext';
 import { Inputs } from './Inputs';
+// import { useModal } from '../hooks/useModal';
+// import PopUp from './PopUp';
+// import styled from 'styled-components';
 
 export const PanelDeControl = () => {
+	useEffect(() => {
+		if (localStorage.getItem('lugar-cultural-rol') !== 'ADMIN') {
+			// let err = new Error('Error en la petición Fetch');
+			let err = new Error('Error in fetch queryyyyyyyy');
+			window.location.replace('/users/signin');
+
+			throw err;
+		}
+	}, []);
+
+	const { museosData } = useContext(VisitasContext);
+
 	return (
 		<>
 			<div className="content-container">
-				<h3 class="section-title">Agregar libro📚</h3>
-				<form action="/admin" class="admin-form" method="POST"></form>
+				<h3 className="section-title">Crear Visita Guiada👍</h3>
+				<form action="/admin" className="admin-form" method="POST"></form>
 				<Inputs></Inputs>
-				<h3 class="section-title">Editar, Eliminar</h3>
-				{/* <form class="shelf-form" action="/admin" method="GET">
+				<h3 className="section-title">Editar info de Museos</h3>
+				{/* <form className="shelf-form" action="/admin" method="GET">
 					<label for="shelf">estante</label>
 
 					<button>Buscar</button>
 				</form> */}
 
-				<table border="1px" class="crud-table">
+				<table border="1px" className="crud-table">
 					<thead>
 						<tr>
 							<th>Editar</th>
@@ -23,47 +40,45 @@ export const PanelDeControl = () => {
 							<th>Ubicacion</th>
 							<th>Valoracion</th>
 							<th>Web</th>
-							<th>Horarios</th>
+
 							<th>Eliminar</th>
 						</tr>
 					</thead>
 
-					<tbody class="search-results-tbody">
-						<tr>
-							<td>
-								<button>
-									<a href="/admin/edit/{{this._id}}">Editar</a>
-								</button>
-							</td>
-							{/* <td> {{this.title}} </td> */}
-							{/* <td> {{this.author}} </td> */}
-							{/* <td> {{this.editorial}} </td> */}
-							{/* <td> {{this.shelf}} </td> */}
-							{/* <td> {{this.quantity}} </td> */}
-							<td>Museo Bellas Artes</td>
-							<td>
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-								Architecto praesentium ex excepturi, incidunt asperiores
-								laboriosam fugiat nulla adipisci eaque culpa.
-							</td>
-							<td>Av. Las heras 3006</td>
-							<td>4💖</td>
-							<td>https://bellasartes.com</td>
+					{museosData.map(
+						({ key, museo, descripcion, ubicacion, img, valoracion, web }) => {
+							return (
+								<tbody className="search-results-tbody" key={key}>
+									<tr>
+										<td>
+											<button data-id={key}>Editar</button>
 
-							<td> 9:20 - 19:00</td>
+											{/* <PopUp isOpen={isOpenModal} closeModal={closeModal}>
+												{key}
+											</PopUp> */}
+										</td>
 
-							<td>
-								<form
-									action="/admin/delete/{{this._id}}?_method=DELETE"
-									method="POST"
-									class="delete-form"
-								>
-									<input type="hidden" name="_method" value="DELETE" />
-									<button>Eliminar</button>
-								</form>
-							</td>
-						</tr>
-					</tbody>
+										<td>{museo}</td>
+										<td>{descripcion}</td>
+										<td>{ubicacion}</td>
+										<td>{valoracion}</td>
+										<td>{web}</td>
+
+										<td>
+											<form
+												action="/admin/delete/{{this._id}}?_method=DELETE"
+												method="POST"
+												className="delete-form"
+											>
+												<input type="hidden" name="_method" value="DELETE" />
+												<button>Eliminar</button>
+											</form>
+										</td>
+									</tr>
+								</tbody>
+							);
+						}
+					)}
 				</table>
 			</div>
 		</>

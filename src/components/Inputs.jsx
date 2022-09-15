@@ -1,85 +1,80 @@
+import { useContext, useState } from 'react';
+import VisitasContext from '../context/VisitasContext';
+
 export const Inputs = () => {
+	const { visitass, setVisitass, addVisit } = useContext(VisitasContext);
+	const [visitaForm, setVisitaForm] = useState({
+		museo: '',
+		descripcion: '',
+		img: '',
+		horario: '',
+	});
+	const handleInput = (e) => {
+		setVisitaForm({ ...visitaForm, [e.target.name]: e.target.value });
+	};
+
 	return (
 		<>
-			<div class="form-group-container">
-				<div class="form-group">
-					<label for="input-tite">Titulo</label>
-					<input
-						autofocus="true"
-						id="input-tite"
-						type="text"
-						class="form-input form-input-title"
-						name="title"
-						required="true"
-						value="{{var.title}}"
-					/>
+			<div className="form-group-container">
+				<div className="form-group">
+					<label for="input-tite">Museo</label>
+					<select
+						name="museo"
+						className="form-input form-input-title"
+						onChange={handleInput}
+					>
+						<option value="bellas artes">Bellas Artes</option>
+						<option value="moderno">Moderno</option>
+						<option value="malba">Malba</option>
+					</select>
 				</div>
-				<div class="form-group">
-					<label for="input-author">Autor</label>
+				<div className="form-group">
+					<label for="input-author">Descripcion</label>
 					<input
 						id="input-author"
-						required="true"
+						required={true}
 						type="text"
-						class="form-input"
-						name="author"
-						value="{{var.author}}"
+						className="form-input"
+						name="descripcion"
+						value={visitaForm.descripcion}
+						onChange={handleInput}
 					/>
 				</div>
 			</div>
-			<div class="form-group-container">
-				<div class="form-group form-editorial">
-					<label for="editorial">Editorial</label>
+			<div className="form-group-container">
+				<div className="form-group form-editorial">
+					<label for="editorial">Imagen</label>
 					<input
 						id="editorial"
-						required="true"
+						required={true}
 						type="text"
-						class="form-input"
-						name="editorial"
-						value="{{var.editorial}}"
+						className="form-input"
+						name="img"
+						value={visitaForm.img}
+						onChange={handleInput}
 					/>
 				</div>
-				<div class="form-group">
-					<label for="input-shelf">Estante</label>
-					<input
-						required="true"
-						id="input-shelf"
-						type="number"
-						class="form-input form-input-half"
-						name="shelf"
-						min="0"
-						value="{{var.shelf}}"
-					/>
-				</div>
-			</div>
-			<div class="form-group-container">
-				<div class="form-group form-editorial">
-					<label for="input-img">Image URL</label>
-					<input
-						id="input-img"
-						type="text"
-						class="form-input form-input-add-info"
-						name="imageUrl"
-						value="{{var.imageUrl}}"
-					/>
-				</div>
-				<div class="form-group form-editorial">
-					<label for="input-likes">Likes</label>
-
+				<div className="form-group form-editorial">
+					<label for="input-likes">Horario</label>
 					<input
 						id="input-likes"
-						type="number"
-						min="0"
-						name="stars"
-						class="form-input form-input-stars"
-						value="{{var.stars}}"
+						type="text"
+						name="horario"
+						className="form-input form-input-stars"
+						value={visitaForm.horario}
+						onChange={handleInput}
 					/>
 				</div>
 			</div>
-			<div class="form-group-container">
+
+			<div className="form-group-container">
 				<input
 					type="submit"
-					class="form-input form-input-submit"
-					value="{{boton}}"
+					className="form-input form-input-submit"
+					value="Crear Visita"
+					onClick={(e) => {
+						addVisit(e, visitaForm);
+					}}
 				/>
 			</div>
 		</>

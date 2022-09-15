@@ -5,19 +5,32 @@ const SignIn = () => {
 		password: '',
 	});
 	const inciarSesion = async (e) => {
-		e.preventDefault();
+		try {
+			e.preventDefault();
 
-		const res = await fetch('http://localhost:3006/api/auth/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(form),
-		});
-		const data = await res.json();
-		localStorage.setItem('token-lugar-cultural', data.token);
+			const res = await fetch('http://localhost:3006/api/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(form),
+			});
+			if (!res.ok) {
+				// let err = new Error('Error en la petición Fetch');
+				let err = new Error('Error in fetch queryyyyyyyy');
+				err.status = res.status || '-erororororororo-';
+				// err.statusText = res.statusText || 'Ocurrió un error';
+				err.statusText = res.statusText || 'An error has ocurreddddd';
 
-		window.location.replace('/');
+				throw err;
+			}
+			const data = await res.json();
+
+			localStorage.setItem('token-lugar-cultural', data.token);
+			window.location.replace('/');
+		} catch (err) {
+			alert(err);
+		}
 	};
 	const handleInput = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });

@@ -6,7 +6,11 @@ const Header = () => {
 	const showDropdown = (e) => {
 		document.querySelector('.user-dropdown-menu').classList.toggle('none');
 	};
-	const cerrarSesion = () => localStorage.removeItem('token-lugar-cultural');
+	const cerrarSesion = () => {
+		localStorage.removeItem('token-lugar-cultural');
+		localStorage.removeItem('lugar-cultural-rol');
+		localStorage.removeItem('lugar-cultural-name');
+	};
 
 	if (token) {
 		console.log('hay token');
@@ -65,6 +69,9 @@ const Header = () => {
 					<div className="header-left">
 						<li className="header-link">
 							<a href="/todo">Lugares</a>
+						</li>
+						<li className="header-link">
+							<a href="/visitas">Visitas Guiadas</a>
 						</li>
 						<li className="header-link">
 							<a href="/estanterias?shelf=8">info básica sobre el museo</a>
