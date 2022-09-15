@@ -9,7 +9,8 @@ import {
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
 
-export default function Login({ navigation }) {
+export default function Login({navigation}) {
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -19,13 +20,13 @@ export default function Login({ navigation }) {
     <View style={styles.contentContainer}>
       <View style={styles.singInCtn}>
         <Text style={styles.title}>Iniciar Sesion</Text>
-        <View style={styles.inputCtn}>
           <TextInput
             style={styles.input}
             onChangeText={(event) => {
               setData({ email: event });
             }}
-            placeholder="Ingrese Usuario"
+            placeholder="Ingresar Nombre"
+            placeholderTextColor="rgba(0, 0, 0, .25)"
           />
           <TextInput
             style={styles.input}
@@ -33,18 +34,16 @@ export default function Login({ navigation }) {
               setData({ password: event });
             }}
             secureTextEntry={true}
-            placeholder="Ingrese Contraseña"
+            placeholder="Ingresar Contraseña"
+            placeholderTextColor="rgba(0, 0, 0, .25)"
           />
-        </View>
-        <View style={styles.buttonCtn}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Home")}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Inicio")}
           >
-            <Text>Aceptar</Text>
-          </TouchableOpacity>
-        </View>
-        <Link style={styles.link} to={{ screen: "Sign Up" }}>
+          <Text style={styles.btnText}>Iniciar Sesion</Text>
+        </TouchableOpacity>
+        <Link style={styles.link} to={{ screen: "Registrarse" }}>
           ¿No tienes una cuenta?
         </Link>
       </View>
@@ -56,52 +55,50 @@ const styles = StyleSheet.create({
   contentContainer: {
     width: "100%",
     height: "100%",
-    paddingVertical: 50,
-    paddingHorizontal: 0,
-    flexGrow: 1,
     display: "flex",
     alignItems: "center",
+    justifyContent: "center"
   },
 
   singInCtn: {
     display: "flex",
+    width: "90%",
     textAlign: "center",
-    justifyContent: "space-around",
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    padding: 25,
+    gap: 12.5
   },
 
   title: {
-    fontSize: 15,
+    fontSize: 25,
     fontWeight: "600",
-    marginVertical: 10,
-  },
-
-  inputCtn: {
-    display: "flex",
   },
 
   input: {
-    height: 40,
     borderWidth: 1,
-    padding: 10,
-    margin: 10,
-  },
-
-  buttonCtn: {
-    display: "flex",
-    borderColor: "#000",
-    borderWidth: 1,
-    borderRadius: 5,
+    borderColor: "rgba(0, 0, 0, .25)",
+    borderRadius: 2.5,
+    fontSize: 25,
     paddingVertical: 5,
-    marginHorizontal: 10,
-    marginVertical: 6,
+    paddingHorizontal: 10
   },
 
   button: {
+    borderRadius: 2.5,
     alignContent: "center",
     alignItems: "center",
+    backgroundColor: "rgb(100, 123, 35)",
+    paddingVertical: 7.5,
+    paddingHorizontal: 10
+  },
+
+  btnText: {
+    fontSize: 25,
+    color: "#fff"
   },
 
   link: {
-    fontSize: 13,
+    fontSize: 25,
   },
 });

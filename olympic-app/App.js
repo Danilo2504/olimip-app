@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from "./components/Home";
-import Login from './components/Login';
-import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -11,11 +11,9 @@ export default function App() {
   return (
     <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen name="Log In" component={Login} />
-        <Stack.Screen name="Sign Up" component={SignUp}/>
-         
-          <Stack.Screen name="Home" component={Home}/>
-         
+          <Stack.Screen name="Iniciar Sesion" component={Login}/>
+          <Stack.Screen name="Registrarse" component={Register}/>
+          <Stack.Screen name="Inicio" component={Home}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
