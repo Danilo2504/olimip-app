@@ -29,7 +29,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   contentContainer: {
     width: "100%",
-    paddingVertical: 50,
+    paddingVertical: 25,
     paddingHorizontal: 0,
     flexGrow: 1,
     display: "flex",
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 
   searchaBarCtn: {
-    paddingTop: 50,
+    paddingTop: 15,
     paddingHorizontal: 0,
     width: "100%",
     alignItems: "center",
