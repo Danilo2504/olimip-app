@@ -1,68 +1,48 @@
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
 
+const {z} = require('zod')
 const bcrypt = require('bcryptjs')
 
-module.exports = class User{
+module.exports = {
+    get: async where => await prisma.user.findUnique({where}),
+    getManyByUsername: async username => await prisma.user.findMany({where: {username: {contains: username}}}),
+    getByEmail: async email => await prisma.user.findUnique({where: {email}}),
+    getByUsername: async username => await prisma.user.findUnique({where: {username}}),
+    getById: async id => await prisma.user.findUnique({where: {id}}),
 
-    constructor(params){
-        try {
-            this.name = params.name
-            this.email = params.email
-            this.password = params.password
-        } catch (error) {
-            
-        }
+    delet: async where => await prisma.user.delete({where}),
+    deletByEmail: async email => await prisma.user.delete({where: {email}}),
+    deletByUsername: async username => await prisma.user.delete({where: {username}}),
+    deletById: async id => await prisma.user.delete({where: {id}}),
 
-    }
+    update: async (where, data) => await prisma.user.update({where, data}),
+    updateByEmail: async (email, data) => await prisma.user.update({where: {email}, data}),
+    updateByUsername: async (username, data) => {
+        return await prisma.user.update({where: {username}, data})
+    },
+    updateById: async (id, data) => await prisma.user.update({where: {id}, data}),
 
-    optional(){
-        if (this.name) return {name: this.name}
-        else return {email: this.email}
-    }
+    register: async data => await prisma.user.create({data}),
+    login: async data => {
+        const user = await prisma.user.findUnique({where: data.username? {username: data.username} : {email: data.email}})
+        const compare = await bcrypt.compareSync(data.password, user.password)
+        if(!compare) throw new Error('Incorrect username, email or password.')
+        return user
+    },
 
-    async save(){
-        return await prisma.user.create({
-            data: {
-                name: this.name,
-                email: this.email,
-                password: this.password
-            }
-        })
-    }
-
-    async find(){
-        return await prisma.user.findUnique({
-            where: this.optional()
-        })
-    }
-
-    async findBy(where){
-        return await prisma.user.findUnique({
-            where
-        })
-    }
-
-    async delete(){
-        return await prisma.user.delete({
-            where: this.optional()
-        })
-    }
-
-    async update(data){
-        return await prisma.user.update({
-            where: this.optional(),
-            data
-        })
-    }
-
-    async login(){
-        const userFind = await this.find()
-
-        const compare = await bcrypt.compareSync(this.password, userFind.password)
-
-        if(!compare) throw new Error('Incorrect name or password.')
-
-        return userFind
-    }
+    RegisterSchema: z.object({
+        username: z.string().min(1).max(255),
+        email: z.string().email(),
+        password: z.string().min(1).max(255)
+    }),
+    LoginSchema: z.object({
+        username: z.string().min(1).max(255),
+        password: z.string().min(1).max(255)
+    }),
+    UpdateSchema: z.object({
+        username: z.string().min(1).max(255).optional(),
+        email: z.string().email().optional(),
+        password: z.string().min(1).max(255).optional()
+    }),
 }
