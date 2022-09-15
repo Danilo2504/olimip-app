@@ -1,57 +1,123 @@
-import {useState } from 'react';
-const SignUp =()=>{
-    const [form, setForm] = useState({
-		name: '',
-		email: '',
-        password:'',
-        // repeatPassword:'',
-	});
-    const registrar=(e)=>{
-     e.preventDefault();
-    //  console.log(form);
-     fetch('http://10.120.0.48:3006/api/auth/register',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },  
-        body:JSON.stringify(form),
-     });
-     alert('confirma tu cuenta!!!!!!!!')
-    //  const data=res.json()
+import React from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { useState } from "react";
 
-    }
-    const handleInput = (e) => {
-        
+export default function SignUp({ navigation }) {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-		setForm({...form, [e.target.name]: e.target.value });
-	};
-    return(
-    <div class="sign-container">
-<div>
-<h2 class="section-title">Crea Una Cuenta</h2>
-<form  onSubmit={(e)=>registrar(e)}>
-<div class="form-group-container">
-    <input autofocus="true" type="text" id="signup-username-input" class="form-input form-input-username" name="name" placeholder="Username" value={form.name} onChange={handleInput}/>
-</div>
-<div class="form-group-container">
-    <input autofocus="true" type="email" id="signup-email-input" class="form-input form-input-username" name="email" placeholder="Username" value={form.email} onChange={handleInput}/>
-</div>
-<div class="form-group-container">
-    <input type="password" class="form-input" name="password" value={form.password} autocomplete="on" placeholder="Crea una contraseña" onChange={handleInput}/>
-</div>
-{/* <div class="form-group-container">
-    <input type="password" class="form-input" name="repeatPassword" autocomplete="false" value={form.repeatPassword} placeholder="Confirma Contraseña" onChange={handleInput}/>
-</div> */}
-<div class="form-group-container">
-    <input  type="submit" class="form-input form-input-submit" value="Registrar"/>
-</div>
-</form>
-<small>¿Ya tienes una cuenta?<a class="mute" href="/users/signup">
-    Ingresa</a></small>
-</div>
-<div class="sign-hero sign-up-img"></div>
-</div>
+  const registrar = (e) => {
+    e.preventDefault();
+    fetch("http://10.120.0.48:3006/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+    Alert.alert("Pro favor confirme su cuenta");
+  };
 
-)
+  return (
+    <View style={styles.contentContainer}>
+      <View style={styles.singInCtn}>
+        <Text style={styles.title}>Crear una Cuenta</Text>
+        <View style={styles.inputCtn}>
+          <TextInput
+            style={styles.input}
+            onChangeText={(event) => {
+              setForm({ name: event });
+            }}
+            placeholder="Nombre"
+          />
+          <TextInput
+            name="email"
+            style={styles.input}
+            onChangeText={(event) => {
+              setForm({ email: event });
+            }}
+            placeholder="Email"
+          />
+          <TextInput
+            name="password"
+            style={styles.input}
+            onChangeText={(event) => {
+              setForm({ password: event });
+            }}
+            secureTextEntry={true}
+            placeholder="Contraseña"
+          />
+        </View>
+        <View style={styles.buttonCtn}>
+          <TouchableOpacity style={styles.button} onPress={(e) => registrar(e)}>
+            <Text>Aceptar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 }
-export default SignUp;
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    width: "100%",
+    height: "100%",
+    paddingVertical: 50,
+    paddingHorizontal: 0,
+    flexGrow: 1,
+    display: "flex",
+    alignItems: "center",
+  },
+
+  singInCtn: {
+    display: "flex",
+    textAlign: "center",
+    justifyContent: "space-around",
+  },
+
+  title: {
+    fontSize: 15,
+    fontWeight: "600",
+    marginVertical: 10,
+  },
+
+  inputCtn: {
+    display: "flex",
+  },
+
+  input: {
+    height: 40,
+    borderWidth: 1,
+    padding: 10,
+    margin: 10,
+  },
+
+  buttonCtn: {
+    display: "flex",
+    borderColor: "#000",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingVertical: 5,
+    marginHorizontal: 10,
+    marginVertical: 6,
+  },
+
+  button: {
+    alignContent: "center",
+    alignItems: "center",
+  },
+
+  link: {
+    fontSize: 13,
+  },
+});

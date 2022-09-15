@@ -1,25 +1,20 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Searchbar } from 'react-native-paper';
 import Home from "./components/Home";
-import "./index.css";
 import Login from './components/Login';
+import SignUp from "./components/SignUp";
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   return (
     <NavigationContainer>
-      <ScrollView>
-        <View>
-          <Searchbar
-            placeholder="Buscar"
-          />
-          <Login/>
-          <Home/>
-        </View>
-      </ScrollView>
+        <Stack.Navigator>
+          <Stack.Screen name="Log In" component={Login} />
+          <Stack.Screen name="Home" component={Home}/>
+          <Stack.Screen name="Sign Up" component={SignUp}/>
+        </Stack.Navigator>
     </NavigationContainer>
-    
   );
 }
