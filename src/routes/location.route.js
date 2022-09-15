@@ -7,10 +7,10 @@ const parseSchema = require('../middlewares/parseSchema')
 const locationExist = require('../middlewares/locationExist')
 const adminTokenValidation = require('../middlewares/adminTokenValidation')
 
-router.post('/', [parseSchema(Location.UploadSchema), adminTokenValidation], controller.post)
-router.get('/many/:name', [locationExist], controller.getMany)
-router.get('/:name', controller.get)
-router.put('/:name', [parseSchema(Location.UpdateSchema), adminTokenValidation, locationExist], controller.put)
+router.post('/', [adminTokenValidation, parseSchema(Location.UploadSchema)], controller.post)
+router.get('/many/:name', controller.getMany)
+router.get('/:name', [locationExist], controller.get)
+router.put('/:name', [adminTokenValidation, parseSchema(Location.UpdateSchema), locationExist], controller.put)
 router.delete('/:name', [adminTokenValidation, locationExist], controller.delet)
 
 module.exports = router
