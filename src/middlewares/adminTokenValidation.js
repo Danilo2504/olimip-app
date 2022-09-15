@@ -8,13 +8,12 @@ module.exports = async (req = request, res = response, next) => {
 
     if(await expiredToken(token)) return res.status(400).json({error: 'Token expired'})
 
-    const {username} = req.params
     const {id} = await getToken(token)
 
-    const user = await User.getByUsername(username)
+    const user = await User.getById(id)
 
     try {
-        if(user.id !== id) return res.status(400).json({error: "Invalid authorization token"})
+        if(user.role !== 'ADMIN') return res.status(400).json({error: "Invalid authorization token"})
     } catch (error) {
         return res.status(400).json({error: "Error authorization token"})
     }

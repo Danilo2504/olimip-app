@@ -20,14 +20,15 @@ model User {
 }
 
 model Location {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  enabled   Boolean  @default(true)
-  name      String   @unique
-  desc      String?  @db.VarChar(255)
-  ubication String?
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  enabled    Boolean  @default(true)
+  name       String   @unique
+  desc       String?  @db.VarChar(255)
+  ubication  String?
+  schedules  String?
   valoration Int?    @default(0)
-  web       String?
+  web        String?
 }
 
 enum Role {
