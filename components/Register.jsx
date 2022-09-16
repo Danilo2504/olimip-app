@@ -19,7 +19,7 @@ export default function Register({ navigation }) {
   });
   const [modalVisible, setModalVisible] = useState(false);
 
-  if(localStorage.getItem('token-lugar-cultural')) console.log('anda a inicio');
+  if (localStorage.getItem('token-lugar-cultural')) navigation.navigate('Inicio')
 
   const register = async (e) => {
     try {
