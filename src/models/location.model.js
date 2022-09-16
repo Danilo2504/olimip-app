@@ -27,7 +27,7 @@ module.exports = {
         desc: z.string().min(1).max(255).optional(),
         ubication: z.string().min(1).max(255).optional(),
         schedules: z.string().min(1).max(255).optional(),
-        valoration: z.string().min(1).max(255).optional(),
+        valoration: z.number().optional(),
         web: z.string().min(1).max(255).optional(),
     }),
     UpdateSchema: z.object({
