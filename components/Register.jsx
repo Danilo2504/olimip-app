@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Modal,
   Pressable,
-  Alert
 } from "react-native";
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
@@ -50,14 +49,13 @@ export default function Register({ navigation }) {
   console.log(form)
   return (
     <View style={styles.contentContainer}>
-      
-      <View style={styles.centeredView}>
+      <View style={modalVisible ? {display: "block"} : {display: "none"}}>
+      {/* <View style={modalVisible?}> */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
@@ -65,11 +63,17 @@ export default function Register({ navigation }) {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Hello World!</Text>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.buttonModal, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Aceptar</Text>
             </Pressable>
+            {/* <Pressable
+              style={[styles.buttonModal, styles.buttonClose]}
+              onPress={}
+            >
+              <Text style={styles.textStyle}>Iniciar sesion</Text>
+            </Pressable> */}
           </View>
         </View>
       </Modal>
@@ -107,7 +111,7 @@ export default function Register({ navigation }) {
           placeholderTextColor="rgba(0, 0, 0, .25)"
         />
         <TouchableOpacity style={styles.button} onPress={(e) => register(e)}>
-          <Text style={styles.btnText}>Registrarse</Text>
+          <Text style={styles.btnText}>Registrarses</Text>
         </TouchableOpacity>
         <Link style={styles.link} to={{ screen: "Iniciar Sesion" }}>
           ¿Tienes una cuenta?
@@ -172,11 +176,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
+    width: "70%",
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    width: "100%",
+    backgroundColor: "grey",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -189,7 +195,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
-  button: {
+  buttonModal: {
     borderRadius: 20,
     padding: 10,
     elevation: 2
