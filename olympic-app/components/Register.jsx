@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function Register({navigation}) {
 
-  const [data, setData] = useState({
+  const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
@@ -19,7 +19,8 @@ export default function Register({navigation}) {
 
   const register = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost/user/register", {
+    console.log(form);
+    await fetch("http://localhost:3006/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +37,7 @@ export default function Register({navigation}) {
             style={styles.input}
             name="username"
             onChangeText={(event) => {
-              setData({ username: event });
+              setForm({ username: event });
             }}
             placeholder="Ingresar Nombre"
             placeholderTextColor="rgba(0, 0, 0, .25)"
@@ -45,7 +46,7 @@ export default function Register({navigation}) {
             style={styles.input}
             name="email"
             onChangeText={(event) => {
-              setData({ email: event });
+              setForm({ email: event });
             }}
             placeholder="Ingresar Email"
             placeholderTextColor="rgba(0, 0, 0, .25)"
@@ -53,7 +54,7 @@ export default function Register({navigation}) {
           <TextInput
             style={styles.input}
             onChangeText={(event) => {
-              setData({ password: event });
+              setForm({ password: event });
             }}
             secureTextEntry={true}
             placeholder="Ingresar Contraseña"
@@ -61,7 +62,7 @@ export default function Register({navigation}) {
           />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Inicio")}
+          onPress={e => register(e)}
           >
           <Text style={styles.btnText}>Registrarse</Text>
           </TouchableOpacity>

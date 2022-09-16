@@ -18,7 +18,8 @@ export default function Login({navigation}) {
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost/user/login", {
+    console.log(JSON.stringify(form))
+    const res = await fetch("http://localhost:3006/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
