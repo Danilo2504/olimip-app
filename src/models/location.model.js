@@ -8,6 +8,7 @@ module.exports = {
 
     get: async where => await prisma.location.findUnique({where}),
     getManyByName: async name => await prisma.location.findMany({where: {name: {contains: name}}}),
+    getAll: async () => await prisma.location.findMany(),
     getByName: async name => await prisma.location.findUnique({where: {name}}),
     getById: async id => await prisma.location.findUnique({where: {id}}),
 

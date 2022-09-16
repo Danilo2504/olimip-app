@@ -10,6 +10,7 @@ const multerFiles = require('../middlewares/multerFiles')
 
 router.post('/', [adminTokenValidation, multerFiles, parseSchema(Location.UploadSchema)], controller.post)
 router.get('/many/:name', controller.getMany)
+router.get('/all', controller.getAll)
 router.get('/:name', [locationExist], controller.get)
 router.put('/:name', [adminTokenValidation, parseSchema(Location.UpdateSchema), locationExist], controller.put)
 router.delete('/:name', [adminTokenValidation, locationExist], controller.delet)

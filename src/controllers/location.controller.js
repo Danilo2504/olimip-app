@@ -34,6 +34,16 @@ const getMany = async (req = request, res = response) => {
     }
 }
 
+const getAll = async (req = request, res = response) => {
+    try {
+        const locations = await Location.getAll()
+
+        res.status(200).json(locations)
+    } catch (error) {
+        res.status(500).json({error})
+    }
+}
+
 const delet = async (req = request, res = response) => {
     try {
         const {name} = req.params
@@ -61,6 +71,7 @@ module.exports = {
     post,
     get,
     getMany,
+    getAll,
     delet,
     put
 }
