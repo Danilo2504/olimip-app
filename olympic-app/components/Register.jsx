@@ -5,6 +5,9 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Modal,
+  Pressable,
+  Alert
 } from "react-native";
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
@@ -15,6 +18,9 @@ export default function Register({ navigation }) {
     email: "",
     password: "",
   });
+  const [modalVisible, setModalVisible] = useState(false);
+
+  if(localStorage.getItem('token-lugar-cultural')) console.log('anda a inicio');
 
   const register = async (e) => {
     try {
@@ -27,6 +33,7 @@ export default function Register({ navigation }) {
         },
         body: JSON.stringify(form),
       });
+      setModalVisible(!modalVisible)
     } catch (err) {
       alert(err);
     }
@@ -40,9 +47,35 @@ export default function Register({ navigation }) {
   const handleInputPass = (password) => {
     setForm({ ...form, password });
   };
-
+  console.log(form)
   return (
     <View style={styles.contentContainer}>
+      
+      <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </View>
+      
+
       <View style={styles.singInCtn}>
         <Text style={styles.title}>Register</Text>
         <TextInput
@@ -134,4 +167,46 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 25,
   },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });

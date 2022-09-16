@@ -6,11 +6,13 @@ import { useState, useEffect } from "react";
 import { showData } from "../services/jsonAPI";
 import { Link } from "@react-navigation/native";
 
-export default function Home() {
+export default function Home({navigation}) {
   const [example, setExample] = useState([]);
 
+  if(!localStorage.getItem('token-lugar-cultural')) navigation.navigate('Iniciar Sesion')
+
   useEffect(() => {
-    showData().then((item) => setExample(item.slice(0, 10)));
+    showData().then((item) => setExample(item));
   }, []);
 
   return (

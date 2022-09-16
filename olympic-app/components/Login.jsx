@@ -9,11 +9,14 @@ import {
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
 
-export default function Login() {
+export default function Login({navigation}) {
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
+
+if(localStorage.getItem('token-lugar-cultural')) navigation.navigate('Inicio')
+
 
   const login = async (e) => {
     try {
@@ -57,14 +60,14 @@ export default function Login() {
           name="username"
           autoFocus={true}
           value={form.username}
-          onChangeText={(userName) => handleInputName(userName)}
+          onChangeText={(userName) => handleInputUser(userName)}
           placeholder="Ingresar Nombre"
           placeholderTextColor="rgba(0, 0, 0, .25)"
           required={true}
         />
         <TextInput
           style={styles.input}
-          onChangeText={(email) => handleInputEmail(email)}
+          onChangeText={(password) => handleInputPass(password)}
           secureTextEntry={true}
           placeholder="Ingresar Contraseña"
           placeholderTextColor="rgba(0, 0, 0, .25)"
