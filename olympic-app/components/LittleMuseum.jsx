@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     boxShadow: "rgb(0 0 0 / 24%) 0px 3px 4px",
     overflow: "hidden",
-    gap: 10
+    gap: 10,
   },
   thumbnail: {
     height: "100%",
     borderRadius: 2,
     aspectRatio: "1/1",
-    backgroundColor: "darkgray"
+    backgroundColor: "darkgray",
   },
 
   image: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
   titulo: {
     fontWeight: "800",
-    fontSize: 17.5
+    fontSize: 17.5,
   },
 
   desc: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 17.5,
     // backgroundColor: "green",
-    height: 15*2 + 17.5*2,
-    overflow: "hidden"
+    height: 15 * 2 + 17.5 * 2,
+    overflow: "hidden",
   },
 });

@@ -9,53 +9,70 @@ import {
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
 
-export default function Login({navigation}) {
-
-  const [data, setData] = useState({
+export default function Login() {
+  const [form, setForm] = useState({
     username: "",
     password: "",
   });
 
   const login = async (e) => {
-    e.preventDefault();
-    console.log(JSON.stringify(form))
-    const res = await fetch("http://localhost:3006/user/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    try {
+      e.preventDefault();
+      console.log(JSON.stringify(form));
+      const res = await fetch("http://localhost:3006/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        let err = new Error("Error en la petición Fetch");
+        err.status = res.status || "-erororororororo-";
+        err.statusText = res.statusText || "Ocurrió un error";
+
+        throw err;
+      }
+      const data = await res.json();
+      localStorage.setItem("token-lugar-cultural", data.token);
+      window.location.replace("/");
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const handleInputUser = (username) => {
+    setForm({ ...form, username });
+  };
+  const handleInputPass = (password) => {
+    setForm({ ...form, password });
   };
 
   return (
     <View style={styles.contentContainer}>
       <View style={styles.singInCtn}>
         <Text style={styles.title}>Iniciar Sesion</Text>
-          <TextInput
-            style={styles.input}
-            name="username"
-            onChangeText={(event) => {
-              setData({ email: event });
-            }}
-            placeholder="Ingresar Nombre"
-            placeholderTextColor="rgba(0, 0, 0, .25)"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(event) => {
-              setData({ password: event });
-            }}
-            secureTextEntry={true}
-            placeholder="Ingresar Contraseña"
-            placeholderTextColor="rgba(0, 0, 0, .25)"
-          />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Inicio")}
-          >
+        <TextInput
+          style={styles.input}
+          name="username"
+          autoFocus={true}
+          value={form.username}
+          onChangeText={(userName) => handleInputName(userName)}
+          placeholder="Ingresar Nombre"
+          placeholderTextColor="rgba(0, 0, 0, .25)"
+          required={true}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(email) => handleInputEmail(email)}
+          secureTextEntry={true}
+          placeholder="Ingresar Contraseña"
+          placeholderTextColor="rgba(0, 0, 0, .25)"
+          required={true}
+        />
+        <TouchableOpacity style={styles.button} onPress={(e) => login(e)}>
           <Text style={styles.btnText}>Iniciar Sesion</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
         <Link style={styles.link} to={{ screen: "Registrarse" }}>
           ¿No tienes una cuenta?
         </Link>
@@ -70,7 +87,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   singInCtn: {
@@ -80,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 5,
     padding: 25,
-    gap: 12.5
+    gap: 12.5,
   },
 
   title: {
@@ -94,7 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 2.5,
     fontSize: 25,
     paddingVertical: 5,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
 
   button: {
@@ -103,12 +120,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgb(100, 123, 35)",
     paddingVertical: 7.5,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
 
   btnText: {
     fontSize: 25,
-    color: "#fff"
+    color: "#fff",
   },
 
   link: {

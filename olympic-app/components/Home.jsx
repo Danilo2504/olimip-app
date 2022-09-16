@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { Searchbar } from "react-native-paper";
 import LittleMuseum from "./littleMuseum";
 import { useState, useEffect } from "react";
 import { showData } from "../services/jsonAPI";
+import { Link } from "@react-navigation/native";
 
 export default function Home() {
   const [example, setExample] = useState([]);
@@ -14,6 +15,12 @@ export default function Home() {
 
   return (
     <ScrollView>
+      <Link style={{ fontSize: 20 }} to={{ screen: "Iniciar Sesion" }}>
+        Iniciar Sesion
+      </Link>
+      <Link style={{ fontSize: 20 }} to={{ screen: "Registrarse" }}>
+        Registrarse
+      </Link>
       <View style={styles.searchaBarCtn}>
         <Searchbar style={styles.searchBar} placeholder="Buscar" />
       </View>

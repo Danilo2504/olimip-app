@@ -9,8 +9,7 @@ import {
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
 
-export default function Register({navigation}) {
-
+export default function Register({ navigation }) {
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -18,54 +17,65 @@ export default function Register({navigation}) {
   });
 
   const register = async (e) => {
-    e.preventDefault();
-    console.log(form);
-    await fetch("http://localhost:3006/user/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    try {
+      e.preventDefault();
+      console.log(form);
+      await fetch("http://localhost:3006/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+    } catch (err) {
+      alert(err);
+    }
+  };
+  const handleInputName = (username) => {
+    setForm({ ...form, username });
+  };
+  const handleInputEmail = (email) => {
+    setForm({ ...form, email });
+  };
+  const handleInputPass = (password) => {
+    setForm({ ...form, password });
   };
 
   return (
     <View style={styles.contentContainer}>
       <View style={styles.singInCtn}>
         <Text style={styles.title}>Register</Text>
-          <TextInput
-            style={styles.input}
-            name="username"
-            onChangeText={(event) => {
-              setForm({ username: event });
-            }}
-            placeholder="Ingresar Nombre"
-            placeholderTextColor="rgba(0, 0, 0, .25)"
-          />
-           <TextInput
-            style={styles.input}
-            name="email"
-            onChangeText={(event) => {
-              setForm({ email: event });
-            }}
-            placeholder="Ingresar Email"
-            placeholderTextColor="rgba(0, 0, 0, .25)"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(event) => {
-              setForm({ password: event });
-            }}
-            secureTextEntry={true}
-            placeholder="Ingresar Contraseña"
-            placeholderTextColor="rgba(0, 0, 0, .25)"
-          />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={e => register(e)}
-          >
+        <TextInput
+          style={styles.input}
+          name="username"
+          autoFocus={true}
+          value={form.username}
+          onChangeText={(userName) => handleInputName(userName)}
+          placeholder="Ingresar Nombre"
+          placeholderTextColor="rgba(0, 0, 0, .25)"
+        />
+        <TextInput
+          style={styles.input}
+          autoFocus={true}
+          name="email"
+          value={form.email}
+          onChangeText={(email) => handleInputEmail(email)}
+          placeholder="Ingresar Email"
+          placeholderTextColor="rgba(0, 0, 0, .25)"
+        />
+        <TextInput
+          style={styles.input}
+          autoComplete="on"
+          name="password"
+          value={form.password}
+          onChangeText={(password) => handleInputPass(password)}
+          secureTextEntry={true}
+          placeholder="Ingresar Contraseña"
+          placeholderTextColor="rgba(0, 0, 0, .25)"
+        />
+        <TouchableOpacity style={styles.button} onPress={(e) => register(e)}>
           <Text style={styles.btnText}>Registrarse</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
         <Link style={styles.link} to={{ screen: "Iniciar Sesion" }}>
           ¿Tienes una cuenta?
         </Link>
@@ -80,7 +90,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   singInCtn: {
@@ -90,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 5,
     padding: 25,
-    gap: 12.5
+    gap: 12.5,
   },
 
   title: {
@@ -104,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 2.5,
     fontSize: 25,
     paddingVertical: 5,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
 
   button: {
@@ -113,12 +123,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgb(100, 123, 35)",
     paddingVertical: 7.5,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
 
   btnText: {
     fontSize: 25,
-    color: "#fff"
+    color: "#fff",
   },
 
   link: {
