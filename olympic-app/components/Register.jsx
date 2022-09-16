@@ -5,64 +5,69 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Alert,
 } from "react-native";
+import { Link } from "@react-navigation/native";
 import { useState } from "react";
 
-export default function SignUp({ navigation }) {
-  const [form, setForm] = useState({
-    name: "",
+export default function Register({navigation}) {
+
+  const [data, setData] = useState({
+    username: "",
     email: "",
     password: "",
   });
 
-  const registrar = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    fetch("http://10.120.0.48:3006/register", {
+    await fetch("http://localhost/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(form),
     });
-    Alert.alert("Pro favor confirme su cuenta");
   };
 
   return (
     <View style={styles.contentContainer}>
       <View style={styles.singInCtn}>
-        <Text style={styles.title}>Crear una Cuenta</Text>
-        <View style={styles.inputCtn}>
+        <Text style={styles.title}>Register</Text>
           <TextInput
             style={styles.input}
+            name="username"
             onChangeText={(event) => {
-              setForm({ name: event });
+              setData({ username: event });
             }}
-            placeholder="Nombre"
+            placeholder="Ingresar Nombre"
+            placeholderTextColor="rgba(0, 0, 0, .25)"
           />
-          <TextInput
+           <TextInput
+            style={styles.input}
             name="email"
-            style={styles.input}
             onChangeText={(event) => {
-              setForm({ email: event });
+              setData({ email: event });
             }}
-            placeholder="Email"
+            placeholder="Ingresar Email"
+            placeholderTextColor="rgba(0, 0, 0, .25)"
           />
           <TextInput
-            name="password"
             style={styles.input}
             onChangeText={(event) => {
-              setForm({ password: event });
+              setData({ password: event });
             }}
             secureTextEntry={true}
-            placeholder="Contraseña"
+            placeholder="Ingresar Contraseña"
+            placeholderTextColor="rgba(0, 0, 0, .25)"
           />
-        </View>
-        <View style={styles.buttonCtn}>
-          <TouchableOpacity style={styles.button} onPress={(e) => registrar(e)}>
-            <Text>Aceptar</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Inicio")}
+          >
+          <Text style={styles.btnText}>Registrarse</Text>
           </TouchableOpacity>
-        </View>
+        <Link style={styles.link} to={{ screen: "Iniciar Sesion" }}>
+          ¿Tienes una cuenta?
+        </Link>
       </View>
     </View>
   );
@@ -72,52 +77,50 @@ const styles = StyleSheet.create({
   contentContainer: {
     width: "100%",
     height: "100%",
-    paddingVertical: 50,
-    paddingHorizontal: 0,
-    flexGrow: 1,
     display: "flex",
     alignItems: "center",
+    justifyContent: "center"
   },
 
   singInCtn: {
     display: "flex",
+    width: "90%",
     textAlign: "center",
-    justifyContent: "space-around",
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    padding: 25,
+    gap: 12.5
   },
 
   title: {
-    fontSize: 15,
+    fontSize: 25,
     fontWeight: "600",
-    marginVertical: 10,
-  },
-
-  inputCtn: {
-    display: "flex",
   },
 
   input: {
-    height: 40,
     borderWidth: 1,
-    padding: 10,
-    margin: 10,
-  },
-
-  buttonCtn: {
-    display: "flex",
-    borderColor: "#000",
-    borderWidth: 1,
-    borderRadius: 5,
+    borderColor: "rgba(0, 0, 0, .25)",
+    borderRadius: 2.5,
+    fontSize: 25,
     paddingVertical: 5,
-    marginHorizontal: 10,
-    marginVertical: 6,
+    paddingHorizontal: 10
   },
 
   button: {
+    borderRadius: 2.5,
     alignContent: "center",
     alignItems: "center",
+    backgroundColor: "rgb(100, 123, 35)",
+    paddingVertical: 7.5,
+    paddingHorizontal: 10
+  },
+
+  btnText: {
+    fontSize: 25,
+    color: "#fff"
   },
 
   link: {
-    fontSize: 13,
+    fontSize: 25,
   },
 });

@@ -12,9 +12,20 @@ import { useState } from "react";
 export default function Login({navigation}) {
 
   const [data, setData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
+
+  const login = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+  };
 
   return (
     <View style={styles.contentContainer}>
@@ -22,6 +33,7 @@ export default function Login({navigation}) {
         <Text style={styles.title}>Iniciar Sesion</Text>
           <TextInput
             style={styles.input}
+            name="username"
             onChangeText={(event) => {
               setData({ email: event });
             }}
@@ -42,7 +54,7 @@ export default function Login({navigation}) {
           onPress={() => navigation.navigate("Inicio")}
           >
           <Text style={styles.btnText}>Iniciar Sesion</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
         <Link style={styles.link} to={{ screen: "Registrarse" }}>
           ¿No tienes una cuenta?
         </Link>
