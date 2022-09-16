@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { LittleMuseum } from './LittleMuseum';
+import jwt_decode from "jwt-decode";
 
 const Home = () => {
 	const [userData, setUserData] = useState();
 	useEffect(() => {
 		const checkUser = async () => {
 			try {
-				const res = await fetch('http://localhost:3006/api/auth/find', {
-					method: 'POST',
+				const tokenData= jwt_decode(localStorage.getItem('token-lugar-cultural'))
+				console.log(tokenData);
+
+				const res = await fetch(`http://localhost:3006/user/${tokenData.name}`, {
+					method: 'GET',
 					headers: {
 						Accept: 'application/json',
 						Authorization: localStorage.getItem('token-lugar-cultural'),
@@ -16,7 +20,7 @@ const Home = () => {
 				});
 				const data = await res.json();
 				setUserData(data);
-				localStorage.setItem('lugar-cultural-name', data.name);
+				localStorage.setItem('lugar-cultural-name', tokenData.name);
 				localStorage.setItem('lugar-cultural-rol', data.role);
 			} catch (error) {
 				alert(error);

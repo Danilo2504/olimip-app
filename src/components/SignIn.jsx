@@ -1,14 +1,14 @@
 import { useState } from 'react';
 const SignIn = () => {
 	const [form, setForm] = useState({
-		namemail: '',
+		username: '',
 		password: '',
 	});
 	const inciarSesion = async (e) => {
 		try {
 			e.preventDefault();
 
-			const res = await fetch('http://localhost:3006/api/auth/login', {
+			const res = await fetch('http://localhost:3006/user/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -46,8 +46,8 @@ const SignIn = () => {
 								autoFocus={true}
 								className="form-input form-input-username"
 								type="text"
-								name="namemail"
-								value={form.namemail}
+								name="username"
+								value={form.username}
 								onChange={handleInput}
 								placeholder="Username"
 								required={true}

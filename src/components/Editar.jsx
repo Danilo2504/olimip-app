@@ -1,42 +1,22 @@
-import { useContext, useState } from 'react';
-import VisitasContext from '../context/VisitasContext';
-
-export const Inputs = () => {
-	const { visitass, setVisitass, addVisit } = useContext(VisitasContext);
-	const [visitaForm, setVisitaForm] = useState({
+import { useState } from "react";
+const Editar=()=>{
+    const EditarMuseo=(e)=>{
+        console.log('aaas');
+    }
+    const [visitaForm, setVisitaForm] = useState({
 		name: '',
 		desc: '',
 		ubication: '',
 		schedules: '',
-		// valoration: '',
+		
 		web: '',
 	});
 	const handleInput = (e) => {
 		setVisitaForm({ ...visitaForm, [e.target.name]: e.target.value });
 	};
-	const crearMuseo= async(e)=>{
-		e.preventDefault()
-		console.log(visitaForm);
-		try {
-			const res=await fetch(`http://localhost:3006/location`,{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',	
-					Authorization: localStorage.getItem('token-lugar-cultural'),
-				},
-				body: JSON.stringify(visitaForm),
-			})
-			
-			const data=await res.json()
-			console.log('data de nuevo museo',data);
-		} catch (error) {
-			alert(error)
-		}
-	}
-
-	return (
-		<>
-			<div className="form-group-container">
+    return (<>
+    <div className="content-container">
+    <div className="form-group-container">
 				<div className="form-group">
 					<label for="input-tite">Museo</label>
 					<input type="text" name="name" className="form-input form-input-title" onChange={handleInput} value={visitaForm.name}/>
@@ -81,18 +61,7 @@ export const Inputs = () => {
 				</div>
 			</div>
 			<div className="form-group-container">
-				{/* <div className="form-group form-editorial">
-					<label for="editorial">valoration</label>
-					<input
-						id="editorial"
-						required={true}
-						type="text"
-						className="form-input"
-						name="valoration"
-						value={visitaForm.valoration}
-						onChange={handleInput}
-					/>
-				</div> */}
+				
 				<div className="form-group form-editorial">
 					<label for="editorial">web</label>
 					<input
@@ -115,10 +84,11 @@ export const Inputs = () => {
 					value="Crear Visita"
 					onClick={(e) => {
 						// addVisit(e, visitaForm);
-						crearMuseo(e)
+						EditarMuseo(e)
 					}}
 				/>
 			</div>
-		</>
-	);
-};
+            </div>
+    </>)
+}
+export default Editar

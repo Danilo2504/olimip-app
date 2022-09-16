@@ -9,6 +9,7 @@ import SignIn from './components/SignIn';
 import Visitas from './components/Visitas';
 import { PanelDeControl } from './components/PanelDeControl';
 import { VisitasProvider } from './context/VisitasContext';
+import Editar from './components/Editar';
 
 function App() {
 	const loggedIn = () =>
@@ -35,6 +36,7 @@ function App() {
 						{loggedIn ? <Redirect to="/admin" /> : <SignIn />}
 					</Route> */}
 					<Route path="/admin" element={<PanelDeControl />} />
+					<Route path="/editar" element={<Editar />} />
 				</Routes>
 				<Footer></Footer>
 			</div>

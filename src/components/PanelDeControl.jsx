@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useContext, useEffect } from 'react';
 import VisitasContext from '../context/VisitasContext';
 import { Inputs } from './Inputs';
@@ -6,6 +7,7 @@ import { Inputs } from './Inputs';
 // import styled from 'styled-components';
 
 export const PanelDeControl = () => {
+	const [allLocations,setAllLocations]=useState([])
 	useEffect(() => {
 		if (localStorage.getItem('lugar-cultural-rol') !== 'ADMIN') {
 			// let err = new Error('Error en la petición Fetch');
@@ -14,6 +16,19 @@ export const PanelDeControl = () => {
 
 			throw err;
 		}
+	}, []);
+	useEffect(() => {
+		const getLocations=async()=>{
+			try {
+				const res=await fetch('http://localhost:3006/location/all')
+				const data=await res.json()
+				setAllLocations(data)
+				console.log(allLocations,'todas las locaciones');
+			} catch (error) {
+				alert(error)
+			}			
+		}
+		getLocations()
 	}, []);
 
 	const { museosData } = useContext(VisitasContext);
@@ -45,23 +60,23 @@ export const PanelDeControl = () => {
 						</tr>
 					</thead>
 
-					{museosData.map(
-						({ key, museo, descripcion, ubicacion, img, valoracion, web }) => {
+					{allLocations.map(
+						({ id, name, desc, ubication, valoration, web }) => {
 							return (
-								<tbody className="search-results-tbody" key={key}>
+								<tbody className="search-results-tbody" key={id}>
 									<tr>
 										<td>
-											<button data-id={key}>Editar</button>
+											<button data-id={id}>Editar</button>
 
 											{/* <PopUp isOpen={isOpenModal} closeModal={closeModal}>
 												{key}
 											</PopUp> */}
 										</td>
 
-										<td>{museo}</td>
-										<td>{descripcion}</td>
-										<td>{ubicacion}</td>
-										<td>{valoracion}</td>
+										<td>{name}</td>
+										<td>{desc}</td>
+										<td>{ubication}</td>
+										<td>{valoration}</td>
 										<td>{web}</td>
 
 										<td>

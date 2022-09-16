@@ -1,7 +1,7 @@
 import { useState } from 'react';
 const SignUp = () => {
 	const [form, setForm] = useState({
-		name: '',
+		username: '',
 		email: '',
 		password: '',
 	});
@@ -9,7 +9,7 @@ const SignUp = () => {
 		try {
 			e.preventDefault();
 			//  console.log(form);
-			await fetch('http://localhost:3006/api/auth/register', {
+			await fetch('http://localhost:3006/user/register', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const SignUp = () => {
 							type="text"
 							id="signup-username-input"
 							className="form-input form-input-username"
-							name="name"
+							name="username"
 							placeholder="Username"
 							value={form.name}
 							onChange={handleInput}
