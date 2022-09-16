@@ -46,11 +46,10 @@ export default function Register({ navigation }) {
   const handleInputPass = (password) => {
     setForm({ ...form, password });
   };
-  console.log(form)
+
   return (
     <View style={styles.contentContainer}>
-      <View style={modalVisible ? {display: "block"} : {display: "none"}}>
-      {/* <View style={modalVisible?}> */}
+      <View style={modalVisible ? {display: "block", alignItems:"center"} : {display: "none"}}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -68,18 +67,17 @@ export default function Register({ navigation }) {
             >
               <Text style={styles.textStyle}>Aceptar</Text>
             </Pressable>
-            {/* <Pressable
+            <Pressable
               style={[styles.buttonModal, styles.buttonClose]}
-              onPress={}
+              onPress={()=>navigation.navigate("Iniciar Sesion")}
             >
               <Text style={styles.textStyle}>Iniciar sesion</Text>
-            </Pressable> */}
+            </Pressable>
           </View>
         </View>
       </Modal>
     </View>
       
-
       <View style={styles.singInCtn}>
         <Text style={styles.title}>Register</Text>
         <TextInput
@@ -111,7 +109,7 @@ export default function Register({ navigation }) {
           placeholderTextColor="rgba(0, 0, 0, .25)"
         />
         <TouchableOpacity style={styles.button} onPress={(e) => register(e)}>
-          <Text style={styles.btnText}>Registrarses</Text>
+          <Text style={styles.btnText}>Registrarse</Text>
         </TouchableOpacity>
         <Link style={styles.link} to={{ screen: "Iniciar Sesion" }}>
           ¿Tienes una cuenta?

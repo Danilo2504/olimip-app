@@ -4,7 +4,6 @@ import { Searchbar } from "react-native-paper";
 import LittleMuseum from "./littleMuseum";
 import { useState, useEffect } from "react";
 import { showData } from "../services/jsonAPI";
-import { Link } from "@react-navigation/native";
 
 export default function Home({navigation}) {
   const [example, setExample] = useState([]);
@@ -17,12 +16,6 @@ export default function Home({navigation}) {
 
   return (
     <ScrollView>
-      <Link style={{ fontSize: 20 }} to={{ screen: "Iniciar Sesion" }}>
-        Iniciar Sesion
-      </Link>
-      <Link style={{ fontSize: 20 }} to={{ screen: "Registrarse" }}>
-        Registrarse
-      </Link>
       <View style={styles.searchaBarCtn}>
         <Searchbar style={styles.searchBar} placeholder="Buscar" />
       </View>
