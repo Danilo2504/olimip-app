@@ -7,7 +7,8 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         // cb(null, `${Date.now()}-${file.originalname}`)
-        cb(null, `${req.body.name + path.extname(file.originalname)}`)
+        // cb(null, `${req.body.name + path.extname(file.originalname)}`)
+        cb(null, `${req.body.name}`)
     }
 })
 
@@ -15,5 +16,5 @@ module.exports = multer({
     storage,
     limits: {fileSize: 1000000}
 }).fields([{
-    name: 'image', maxCount: 10
+    name: 'image', maxCount: 1
 }])
