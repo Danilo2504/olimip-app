@@ -73,13 +73,13 @@ export const PanelDeControl = () => {
 							<th>Ubicacion</th>
 							<th>Valoracion</th>
 							<th>Web</th>
-
+							<th>image</th>
 							<th>Eliminar</th>
 						</tr>
 					</thead>
 
 					{allLocations.map(
-						({ id, name, desc, ubication, valoration, web }) => {
+						({ id, name, desc, ubication, valoration, web,image }) => {
 							return (
 								<tbody className="search-results-tbody" key={id}>
 									<tr>
@@ -96,6 +96,7 @@ export const PanelDeControl = () => {
 										<td>{ubication}</td>
 										<td>{valoration}</td>
 										<td>{web}</td>
+										<td>{image}</td>
 
 										<td>
 											

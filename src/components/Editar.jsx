@@ -16,6 +16,7 @@ const Editar=()=>{
 		ubication: '',
 		schedules: '',
 		web: '',
+		image: '',
 	});
     const EditarMuseo=async(e)=>{
 		e.preventDefault()
@@ -99,6 +100,18 @@ const Editar=()=>{
 						className="form-input"
 						name="web"
 						value={visitaForm.web}
+						onChange={handleInput}
+					/>
+				</div>
+				<div className="form-group form-editorial">
+					<label for="editorial">image</label>
+					<input
+						id="editorial"
+						required={true}
+						type="file"
+						className="form-input"
+						name="image"
+						value={visitaForm.image}
 						onChange={handleInput}
 					/>
 				</div>

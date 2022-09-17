@@ -10,6 +10,7 @@ export const Inputs = () => {
 		schedules: '',
 		// valoration: '',
 		web: '',
+		image: '',
 	});
 	const handleInput = (e) => {
 		setVisitaForm({ ...visitaForm, [e.target.name]: e.target.value });
@@ -105,6 +106,15 @@ export const Inputs = () => {
 						value={visitaForm.web}
 						onChange={handleInput}
 					/>
+				</div>
+				<div className="form-group form-editorial">
+					<label for="editorial">Imagen</label>
+					<input type="file" name="image" id="editorial"
+						required={true}
+						className="form-input"
+						value={visitaForm.image}
+						onChange={handleInput} />
+					
 				</div>
 				
 			</div>
