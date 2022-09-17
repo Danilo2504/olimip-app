@@ -59,7 +59,7 @@ const delet = async (req = request, res = response) => {
 const put = async (req = request, res = response) => {
     try {
         const {name} = req.params
-        const location = await Location.updateByUsername(name, req.body)
+        const location = await Location.updateByName(name, req.body)
 
         res.status(200).json(location)
     } catch (error) {
