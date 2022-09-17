@@ -1,21 +1,49 @@
+import { useEffect } from "react";
 import { useState } from "react";
 const Editar=()=>{
-    const EditarMuseo=(e)=>{
-        console.log('aaas');
-    }
-    const [visitaForm, setVisitaForm] = useState({
+	useEffect(() => {
+		if (localStorage.getItem('lugar-cultural-rol') !== 'ADMIN') {
+			// let err = new Error('Error en la petición Fetch');
+			let err = new Error('Error in fetch queryyyyyyyy');
+			window.location.replace('/users/signin');
+
+			throw err;
+		}
+	}, []);
+	const [visitaForm, setVisitaForm] = useState({
 		name: '',
 		desc: '',
 		ubication: '',
 		schedules: '',
-		
 		web: '',
 	});
+    const EditarMuseo=async(e)=>{
+		e.preventDefault()
+		// {}
+        try {
+			const res=await fetch(`http://localhost:3006/location/${visitaForm.name}`,{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: localStorage.getItem('token-lugar-cultural'),
+				},
+				body: JSON.stringify(visitaForm),
+			})
+			const data=await res.json()
+			window.location.replace('/admin')
+		} catch (error) {
+			alert(error)
+		}
+    }
 	const handleInput = (e) => {
 		setVisitaForm({ ...visitaForm, [e.target.name]: e.target.value });
 	};
     return (<>
     <div className="content-container">
+	<a href="/admin">Volver</a>
+	<h3 className="section-title">Editar</h3>
+	
+	
     <div className="form-group-container">
 				<div className="form-group">
 					<label for="input-tite">Museo</label>
@@ -81,9 +109,9 @@ const Editar=()=>{
 				<input
 					type="submit"
 					className="form-input form-input-submit"
-					value="Crear Visita"
+					value="Editar Museo"
 					onClick={(e) => {
-						// addVisit(e, visitaForm);
+					
 						EditarMuseo(e)
 					}}
 				/>

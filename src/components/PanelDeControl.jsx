@@ -31,12 +31,30 @@ export const PanelDeControl = () => {
 		getLocations()
 	}, []);
 
-	const { museosData } = useContext(VisitasContext);
-
+	
+	const eliminarMuseo=async(e)=>{
+		
+		const name=e.target.dataset.name
+		const deleteMuseo=window.confirm('Deseas eliminar el museo?');
+		try {
+			if(deleteMuseo){
+				const res=await fetch(`http://localhost:3006/location/${name}`,{
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: localStorage.getItem('token-lugar-cultural'),
+					},
+				})
+				window.location.reload()
+			}
+		} catch (error) {
+			alert(error)
+		}
+	}
 	return (
 		<>
 			<div className="content-container">
-				<h3 className="section-title">Crear Visita Guiada👍</h3>
+				<h3 className="section-title">Agregar Museo👍</h3>
 				<form action="/admin" className="admin-form" method="POST"></form>
 				<Inputs></Inputs>
 				<h3 className="section-title">Editar info de Museos</h3>
@@ -66,11 +84,11 @@ export const PanelDeControl = () => {
 								<tbody className="search-results-tbody" key={id}>
 									<tr>
 										<td>
-											<button data-id={id}>Editar</button>
+											<button data-id={id} onClick={()=>{
+												alert(`Por favor recorda el nombre del museo para editarlo. Copialo -> ${name} `)
+											}}><a href="/editar">Editar</a></button>
 
-											{/* <PopUp isOpen={isOpenModal} closeModal={closeModal}>
-												{key}
-											</PopUp> */}
+											
 										</td>
 
 										<td>{name}</td>
@@ -80,14 +98,10 @@ export const PanelDeControl = () => {
 										<td>{web}</td>
 
 										<td>
-											<form
-												action="/admin/delete/{{this._id}}?_method=DELETE"
-												method="POST"
-												className="delete-form"
-											>
-												<input type="hidden" name="_method" value="DELETE" />
-												<button>Eliminar</button>
-											</form>
+											
+												
+												<button data-name={name} onClick={eliminarMuseo}>Eliminar</button>
+											
 										</td>
 									</tr>
 								</tbody>

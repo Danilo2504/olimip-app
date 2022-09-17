@@ -29,6 +29,7 @@ export const Inputs = () => {
 			
 			const data=await res.json()
 			console.log('data de nuevo museo',data);
+			window.location.reload()
 		} catch (error) {
 			alert(error)
 		}
@@ -112,7 +113,7 @@ export const Inputs = () => {
 				<input
 					type="submit"
 					className="form-input form-input-submit"
-					value="Crear Visita"
+					value="Agregar Museo"
 					onClick={(e) => {
 						// addVisit(e, visitaForm);
 						crearMuseo(e)
