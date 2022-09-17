@@ -23,16 +23,19 @@ export default function Register({ navigation }) {
 
   const register = async (e) => {
     try {
-      e.preventDefault();
-      console.log(form);
-      await fetch("http://localhost:3006/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      setModalVisible(!modalVisible)
+      if(!Object.entries(form).some(([key, value]) => (value).trim() == '' )){
+        e.preventDefault();
+        console.log(form);
+        await fetch("http://localhost:3006/user/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+        setModalVisible(!modalVisible)
+      }
+
     } catch (err) {
       alert(err);
     }
@@ -49,7 +52,7 @@ export default function Register({ navigation }) {
 
   return (
     <View style={styles.contentContainer}>
-      <View style={modalVisible ? {display: "block", alignItems:"center"} : {display: "none"}}>
+      <View style={styles.centeredView + modalVisible ? {display: "block", alignItems:"center"} : {display: "none"}}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -60,8 +63,9 @@ export default function Register({ navigation }) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
+            <Text style={styles.modalText}>Confirma tu email !!</Text>
+            <View style={styles.buttonCtn}>
+              <Pressable
               style={[styles.buttonModal, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
@@ -73,6 +77,8 @@ export default function Register({ navigation }) {
             >
               <Text style={styles.textStyle}>Iniciar sesion</Text>
             </Pressable>
+            </View>
+           
           </View>
         </View>
       </Modal>
@@ -88,6 +94,7 @@ export default function Register({ navigation }) {
           onChangeText={(userName) => handleInputName(userName)}
           placeholder="Ingresar Nombre"
           placeholderTextColor="rgba(0, 0, 0, .25)"
+          required={true}
         />
         <TextInput
           style={styles.input}
@@ -97,6 +104,8 @@ export default function Register({ navigation }) {
           onChangeText={(email) => handleInputEmail(email)}
           placeholder="Ingresar Email"
           placeholderTextColor="rgba(0, 0, 0, .25)"
+          required={true}
+          type="email"
         />
         <TextInput
           style={styles.input}
@@ -107,6 +116,7 @@ export default function Register({ navigation }) {
           secureTextEntry={true}
           placeholder="Ingresar Contraseña"
           placeholderTextColor="rgba(0, 0, 0, .25)"
+          required={true}
         />
         <TouchableOpacity style={styles.button} onPress={(e) => register(e)}>
           <Text style={styles.btnText}>Registrarse</Text>
@@ -175,13 +185,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    width: "70%",
   },
+
   modalView: {
     margin: 20,
     width: "100%",
-    backgroundColor: "grey",
-    borderRadius: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.806)",
+    boxShadow: "rgb(0 0 0 / 24%) 0px 3px 4px",
+    borderRadius: 2.5,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
@@ -193,24 +204,33 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
+
+  buttonCtn: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    gap: 15,
+  },
+
   buttonModal: {
-    borderRadius: 20,
+    borderRadius: 2,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
+
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "rgb(100, 123, 35)",
   },
+
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+    color: "white", 
+    textAlign: "center",
+    fontSize: 20
   },
+
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 25
   }
 });

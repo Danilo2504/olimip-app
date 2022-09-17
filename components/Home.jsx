@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, View, Text, ScrollView, Image } from "react-native";
 import { Searchbar } from "react-native-paper";
 import LittleMuseum from "./littleMuseum";
 import { useState, useEffect } from "react";
@@ -16,6 +16,11 @@ export default function Home({navigation}) {
 
   return (
     <ScrollView>
+      <View>
+        <Image/>
+        <Text>Salir</Text>
+        <Text>Ayuda</Text>
+      </View>
       <View style={styles.searchaBarCtn}>
         <Searchbar style={styles.searchBar} placeholder="Buscar" />
       </View>
