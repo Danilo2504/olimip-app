@@ -6,31 +6,29 @@ import { Routes, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import Visitas from './components/Visitas';
+import InfoBasica from './components/InfoBasica';
 import { PanelDeControl } from './components/PanelDeControl';
-import { VisitasProvider } from './context/VisitasContext';
+
 import Editar from './components/Editar';
 
 function App() {
 	const loggedIn = () =>
 		localStorage.getItem('lugar-cultural-rol') === 'ADMIN' ? true : false;
 	return (
-		<VisitasProvider>
+		
 			<div className="container">
+				
 				<Header></Header>
+			<div className="content-container">
 
 				<Routes>
 					<Route path="/" element={<Home></Home>} />
 					<Route
 						path="users/signup"
-						element={
-							<div className="content-container">
-								<SignUp />
-							</div>
-						}
+						element={<SignUp />}
 					/>
 					<Route path="users/signin" element={<SignIn />} />
-					<Route path="/visitas" element={<Visitas />} />
+					<Route path="/infobasica" element={<InfoBasica />} />
 
 					{/* <Route path="/admin">
 						{loggedIn ? <Redirect to="/admin" /> : <SignIn />}
@@ -38,9 +36,10 @@ function App() {
 					<Route path="/admin" element={<PanelDeControl />} />
 					<Route path="/editar" element={<Editar />} />
 				</Routes>
+			</div>
 				<Footer></Footer>
 			</div>
-		</VisitasProvider>
+		
 	);
 }
 

@@ -67,14 +67,11 @@ const Header = () => {
 						<a href="/">Puntos Culturales</a>
 					</h1>
 					<div className="header-left">
+						
+						
 						<li className="header-link">
-							<a href="/todo">Lugares</a>
-						</li>
-						<li className="header-link">
-							<a href="/visitas">Visitas Guiadas</a>
-						</li>
-						<li className="header-link">
-							<a href="/estanterias?shelf=8">info básica sobre el museo</a>
+							Link
+							<a href="/infobasica">info básica sobre el museo</a>
 						</li>
 						{localStorage.getItem('lugar-cultural-rol') === 'ADMIN' && (
 							<li className="header-link">

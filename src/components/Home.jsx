@@ -23,21 +23,22 @@ const Home = () => {
 				localStorage.setItem('lugar-cultural-name', tokenData.name);
 				localStorage.setItem('lugar-cultural-rol', data.role);
 			} catch (error) {
-				alert(error);
+				// alert(error);
+				console.log(error);
 			}
 		};
 		checkUser();
 	}, []);
 	console.log(userData);
 	return (
-		<div className="content-container">
+		<>
 			{/* {
     userData.role==='ADMIN'?<div>asdsad<div/>:<div>nooo<div/>
 } */}
 			<LittleMuseum></LittleMuseum>
 			<LittleMuseum></LittleMuseum>
 			<LittleMuseum></LittleMuseum>
-		</div>
+		</>
 	);
 };
 export default Home;

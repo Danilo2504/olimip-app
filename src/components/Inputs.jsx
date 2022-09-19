@@ -29,7 +29,7 @@ export const Inputs = () => {
 
 			const data = await res.json();
 			console.log('data de nuevo museo', data);
-			// window.location.reload();
+			window.location.reload();
 		} catch (error) {
 			alert(error);
 		}

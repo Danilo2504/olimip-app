@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useContext, useEffect } from 'react';
-import VisitasContext from '../context/VisitasContext';
+
 import { Inputs } from './Inputs';
 // import { useModal } from '../hooks/useModal';
 // import PopUp from './PopUp';
@@ -53,64 +53,58 @@ export const PanelDeControl = () => {
 	}
 	return (
 		<>
-			<div className="content-container">
-				<h3 className="section-title">Agregar Museo👍</h3>
-				<form action="/admin" className="admin-form" method="POST"></form>
-				<Inputs></Inputs>
-				<h3 className="section-title">Editar info de Museos</h3>
-				{/* <form className="shelf-form" action="/admin" method="GET">
-					<label for="shelf">estante</label>
+			<h3 className="section-title">Agregar Museo👍</h3>
+			<form action="/admin" className="admin-form" method="POST"></form>
+			<Inputs></Inputs>
+			<h3 className="section-title">Editar info de Museos</h3>
 
-					<button>Buscar</button>
-				</form> */}
+			<table border="1px" className="crud-table">
+				<thead>
+					<tr>
+						<th>Editar</th>
+						<th>Nombre</th>
+						<th>Descripcion</th>
+						<th>Ubicacion</th>
+						<th>Valoracion</th>
+						<th>Web</th>
+						{/* <th>image</th> */}
+						<th>Eliminar</th>
+					</tr>
+				</thead>
 
-				<table border="1px" className="crud-table">
-					<thead>
-						<tr>
-							<th>Editar</th>
-							<th>Nombre</th>
-							<th>Descripcion</th>
-							<th>Ubicacion</th>
-							<th>Valoracion</th>
-							<th>Web</th>
-							<th>image</th>
-							<th>Eliminar</th>
-						</tr>
-					</thead>
+				{allLocations.map(
+					({ id, name, desc, ubication, valoration, web,image }) => {
+						return (
+							<tbody className="search-results-tbody" key={id}>
+								<tr>
+									<td>
+										<button data-id={id} onClick={()=>{
+											alert(`Por favor recorda el nombre del museo para editarlo. Copialo -> ${name} `)
+										}}><a href="/editar">Editar</a></button>
 
-					{allLocations.map(
-						({ id, name, desc, ubication, valoration, web,image }) => {
-							return (
-								<tbody className="search-results-tbody" key={id}>
-									<tr>
-										<td>
-											<button data-id={id} onClick={()=>{
-												alert(`Por favor recorda el nombre del museo para editarlo. Copialo -> ${name} `)
-											}}><a href="/editar">Editar</a></button>
+										
+									</td>
 
+									<td>{name}</td>
+									<td>{desc}</td>
+									<td>{ubication}</td>
+									<td>{valoration}</td>
+									<td>{web}</td>
+									{/* <td>{image}</td> */}
+
+									<td>
+										
 											
-										</td>
-
-										<td>{name}</td>
-										<td>{desc}</td>
-										<td>{ubication}</td>
-										<td>{valoration}</td>
-										<td>{web}</td>
-										<td>{image}</td>
-
-										<td>
-											
-												
-												<button data-name={name} onClick={eliminarMuseo}>Eliminar</button>
-											
-										</td>
-									</tr>
-								</tbody>
-							);
-						}
-					)}
-				</table>
-			</div>
+											<button data-name={name} onClick={eliminarMuseo}>Eliminar</button>
+										
+									</td>
+								</tr>
+							</tbody>
+						);
+					}
+				)}
+			</table>
+			
 		</>
 	);
 };
