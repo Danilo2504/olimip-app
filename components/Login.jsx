@@ -1,22 +1,21 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import { Link } from "@react-navigation/native";
+import { Text, StyleSheet } from "react-native";
+import FormContainer from "./FormContainer";
+import FormInput from "./FormInput";
+import FormSubmit from "./FormSubmit";
 import { useState } from "react";
+import "localstorage-polyfill";
 
-export default function Login({navigation}) {
+const Login = ({ navigation }) => {
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
 
-if(localStorage.getItem('token-lugar-cultural')) navigation.navigate('Inicio')
+  const { username, password } = form;
 
+  if (localStorage.getItem("token-lugar-cultural"))
+    navigation.navigate("Inicio");
 
   const login = async (e) => {
     try {
@@ -44,94 +43,52 @@ if(localStorage.getItem('token-lugar-cultural')) navigation.navigate('Inicio')
     }
   };
 
-  const handleInputUser = (username) => {
-    setForm({ ...form, username });
-  };
-  const handleInputPass = (password) => {
-    setForm({ ...form, password });
+  const handleOnChangeText = (value, fieldName) => {
+    setForm({ ...form, [fieldName]: value });
   };
 
   return (
-    <View style={styles.contentContainer}>
-      <View style={styles.singInCtn}>
-        <Text style={styles.title}>Iniciar Sesion</Text>
-        <TextInput
-          style={styles.input}
-          name="username"
-          autoFocus={true}
-          value={form.username}
-          onChangeText={(userName) => handleInputUser(userName)}
-          placeholder="Ingresar Nombre"
-          placeholderTextColor="rgba(0, 0, 0, .25)"
-          required={true}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={(password) => handleInputPass(password)}
-          secureTextEntry={true}
-          placeholder="Ingresar Contraseña"
-          placeholderTextColor="rgba(0, 0, 0, .25)"
-          required={true}
-        />
-        <TouchableOpacity style={styles.button} onPress={(e) => login(e)}>
-          <Text style={styles.btnText}>Iniciar Sesion</Text>
-        </TouchableOpacity>
-        <Link style={styles.link} to={{ screen: "Registrarse" }}>
-          ¿No tienes una cuenta?
-        </Link>
-      </View>
-    </View>
+    <FormContainer>
+      <Text style={styles.title}>Iniciar Sesion</Text>
+      <FormInput
+        placeholder="Ingrese su nombre"
+        name="username"
+        label="Nombre o email"
+        autoFocus={true}
+        secureTextEntry={false}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        value={username}
+        onChangeText={(value) => handleOnChangeText(value, "username")}
+      />
+      <FormInput
+        placeholder="Ingrese su contraseña"
+        name="password"
+        label="Contraseña"
+        autoFocus={false}
+        secureTextEntry={true}
+        autoCapitalize="none"
+        keyboardType="default"
+        value={password}
+        onChangeText={(value) => handleOnChangeText(value, "password")}
+      />
+      <FormSubmit
+        buttonText="Iniciar Sesión"
+        helpText="¿No tienes una cuenta?"
+        screen="RegisterForm"
+        onPress={(e) => login(e)}
+      />
+    </FormContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  singInCtn: {
-    display: "flex",
-    width: "90%",
-    textAlign: "center",
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    padding: 25,
-    gap: 12.5,
-  },
-
   title: {
     fontSize: 25,
     fontWeight: "600",
-  },
-
-  input: {
-    borderWidth: 1,
-    borderColor: "rgba(0, 0, 0, .25)",
-    borderRadius: 2.5,
-    fontSize: 25,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-
-  button: {
-    borderRadius: 2.5,
-    alignContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgb(100, 123, 35)",
-    paddingVertical: 7.5,
-    paddingHorizontal: 10,
-  },
-
-  btnText: {
-    fontSize: 25,
-    color: "#fff",
-  },
-
-  link: {
-    fontSize: 25,
+    textAlign: "center",
+    marginVertical: 12.5,
   },
 });
+
+export default Login;

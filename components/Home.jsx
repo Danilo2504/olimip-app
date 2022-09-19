@@ -1,32 +1,54 @@
 import React from "react";
-import { StyleSheet, View, Text, ScrollView, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
 import { Searchbar } from "react-native-paper";
-import LittleMuseum from "./littleMuseum";
 import { useState, useEffect } from "react";
-import { showData } from "../services/jsonAPI";
+import { getLocations } from "../services/apiServices";
+import CardsComponent from "./CardsComponent";
+import ImgPaths from "../consts/ImgPaths";
+import "localstorage-polyfill";
 
-export default function Home({navigation}) {
-  const [example, setExample] = useState([]);
+export default function Home({ navigation }) {
+  const [apiData, setApiData] = useState([]);
+  const [menuNav, setMenuNav] = useState(false);
 
-  if(!localStorage.getItem('token-lugar-cultural')) navigation.navigate('Iniciar Sesion')
+  // if (!localStorage.getItem("token-lugar-cultural"))
+  //   navigation.navigate("Iniciar Sesion");
+
+  const cerrarSesion = () => {
+    localStorage.removeItem("token-lugar-cultural");
+  };
 
   useEffect(() => {
-    showData().then((item) => setExample(item));
+    getLocations().then((item) => setApiData(item));
   }, []);
 
   return (
     <ScrollView>
-      <View>
-        <Image/>
-        <Text>Salir</Text>
-        <Text>Ayuda</Text>
-      </View>
-      <View style={styles.searchaBarCtn}>
-        <Searchbar style={styles.searchBar} placeholder="Buscar" />
+      <StatusBar />
+      <View style={styles.navBarCtn}>
+        <View style={styles.searchBarCtn}>
+          <Searchbar style={styles.searchBar} placeholder="Buscar" />
+        </View>
+        <TouchableOpacity
+          onPress={() => cerrarSesion()}
+          style={styles.dropDownStyle}
+          activeOpacity={0.8}
+        >
+          <Text>Salir</Text>
+          <Image source={ImgPaths.iconDropDown} />
+        </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>
-        {example.map((item, index) => (
-          <LittleMuseum key={index} data={item} />
+        {apiData.map((item, index) => (
+          <CardsComponent key={index} data={item} />
         ))}
       </View>
     </ScrollView>
@@ -34,6 +56,36 @@ export default function Home({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  navBarCtn: {
+    display: "flex",
+    paddingVertical: 25,
+    paddingHorizontal: 10,
+    backgroundColor: "rgba(0,0,0,0.2)",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "space-around",
+  },
+
+  dropDownStyle: {
+    paddingHorizontal: 5,
+    backgroundColor: "white",
+    minHeight: 10,
+    borderRadius: 2,
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    alignItems: "center",
+  },
+
+  searchBarCtn: {
+    width: "75%",
+  },
+
+  searchBar: {
+    width: "100%",
+    borderRadius: 2,
+    backgroundColor: "rgb(245,245,245)",
+  },
+
   contentContainer: {
     width: "100%",
     paddingVertical: 25,
@@ -41,16 +93,5 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     display: "flex",
     alignItems: "center",
-  },
-
-  searchaBarCtn: {
-    paddingTop: 15,
-    paddingHorizontal: 0,
-    width: "100%",
-    alignItems: "center",
-  },
-
-  searchBar: {
-    width: "90%",
   },
 });

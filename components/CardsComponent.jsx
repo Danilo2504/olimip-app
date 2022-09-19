@@ -1,18 +1,15 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function LittleMuseum({ data }) {
-  const { title, thumbnailUrl } = data;
+export default function CardsComponent({ data }) {
+  const { desc, thumbnailUrl, name } = data;
   return (
     <View style={styles.littleMuseumCtn}>
       <View style={styles.thumbnail}>
         <Image style={styles.image} source={{ uri: thumbnailUrl }} />
       </View>
       <View style={styles.titleAndDescContainer}>
-        <Text style={styles.titulo}>{title}</Text>
-        <Text style={styles.desc}>
-          Lorem iTextsum dolor sit amet consectetur adiTextisicing elit.
-          Reiciendis deserunt, quod doloribus beatae.
-        </Text>
+        <Text style={styles.titulo}>{name}</Text>
+        <Text style={styles.desc}>{desc}</Text>
       </View>
     </View>
   );
