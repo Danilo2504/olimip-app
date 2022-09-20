@@ -1,14 +1,12 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View, Pressable, Modal } from "react-native";
 import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
 import Formsubmit from "./FormSubmit";
-import FormModal from "./FormModal";
 import { useState } from "react";
-import "localstorage-polyfill";
 
-const Register = () => {
-  const [modalState, setModalState] = useState(false);
+const Register = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -36,7 +34,7 @@ const Register = () => {
           },
           body: JSON.stringify(form),
         });
-        setModalState(!modalState);
+        setModalVisible(!modalVisible);
       }
     } catch (err) {
       alert(err);
@@ -45,7 +43,37 @@ const Register = () => {
 
   return (
     <FormContainer>
-      <FormModal state={modalState} />
+      <View style={modalVisible ? {} : { display: "none" }}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Confirma tu email !!</Text>
+              <View style={styles.buttonCtn}>
+                <Pressable
+                  style={[styles.buttonModal, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle}>Aceptar</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.buttonModal, styles.buttonClose]}
+                  onPress={() => navigation.navigate("Iniciar Sesion")}
+                >
+                  <Text style={styles.textStyle}>Iniciar sesion</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
+
       <Text style={styles.title}>Registrarse</Text>
       <FormInput
         placeholder="Ingrese su nombre"
@@ -83,7 +111,7 @@ const Register = () => {
       <Formsubmit
         buttonText="Registrarse"
         helpText="¿Tienes una cuenta?"
-        screen="LoginForm"
+        screen="Iniciar Sesion"
         onPress={(e) => register(e)}
       />
     </FormContainer>
@@ -96,6 +124,67 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
     marginVertical: 12.5,
+  },
+  // modal styles
+  centeredView: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(75, 75, 75, 0.806)",
+  },
+
+  modalView: {
+    margin: 20,
+    width: "90%",
+    height: "25%",
+    backgroundColor: "white",
+    justifyContent: "center",
+    boxShadow: "rgb(0 0 0 / 24%) 0px 3px 4px",
+    borderRadius: 2.5,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  buttonCtn: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+  },
+
+  buttonModal: {
+    borderRadius: 2.5,
+    alignContent: "center",
+    alignItems: "center",
+    paddingVertical: 7.5,
+    paddingHorizontal: 10,
+    elevation: 2,
+    margin: 12.5,
+  },
+
+  buttonClose: {
+    backgroundColor: "rgb(100, 123, 35)",
+  },
+
+  textStyle: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "600",
+    fontSize: 25,
+  },
+
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 25,
   },
 });
 

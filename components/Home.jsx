@@ -13,17 +13,16 @@ import { useState, useEffect } from "react";
 import { getLocations } from "../services/apiServices";
 import CardsComponent from "./CardsComponent";
 import ImgPaths from "../consts/ImgPaths";
-import "localstorage-polyfill";
 
 export default function Home({ navigation }) {
   const [apiData, setApiData] = useState([]);
-  const [menuNav, setMenuNav] = useState(false);
 
-  // if (!localStorage.getItem("token-lugar-cultural"))
-  //   navigation.navigate("Iniciar Sesion");
+  if (!localStorage.getItem("token-lugar-cultural"))
+    navigation.navigate("Iniciar Sesion");
 
   const cerrarSesion = () => {
     localStorage.removeItem("token-lugar-cultural");
+    navigation.navigate("Iniciar Sesion");
   };
 
   useEffect(() => {

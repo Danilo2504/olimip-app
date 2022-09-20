@@ -4,7 +4,6 @@ import FormContainer from "./FormContainer";
 import FormInput from "./FormInput";
 import FormSubmit from "./FormSubmit";
 import { useState } from "react";
-import "localstorage-polyfill";
 
 const Login = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -75,7 +74,7 @@ const Login = ({ navigation }) => {
       <FormSubmit
         buttonText="Iniciar Sesión"
         helpText="¿No tienes una cuenta?"
-        screen="RegisterForm"
+        screen="Registrarse"
         onPress={(e) => login(e)}
       />
     </FormContainer>
